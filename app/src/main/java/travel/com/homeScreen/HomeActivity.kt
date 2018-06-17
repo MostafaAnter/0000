@@ -1,6 +1,7 @@
 
 package travel.com.homeScreen
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -8,14 +9,33 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import kotlinx.android.synthetic.main.content_home.*
 import travel.com.R
 import travel.com.utility.Constants
 import travel.com.utility.Util
 
-class HomeActivity : LocalizationActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : LocalizationActivity(), NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+    fun Context.toast(message: CharSequence) =
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            button1 -> {
+                toast("button1")
+            }
+            button2 -> {
+                toast("button2")
+            }
+            button3 -> {
+                toast("button3")
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +51,10 @@ class HomeActivity : LocalizationActivity(), NavigationView.OnNavigationItemSele
 
         nav_view.setNavigationItemSelectedListener(this)
         Util.changeFontOfNavigation(this, nav_view)
+
+        button1.setOnClickListener(this)
+        button2.setOnClickListener(this)
+        button3.setOnClickListener(this)
     }
 
     override fun onBackPressed() {
@@ -63,7 +87,8 @@ class HomeActivity : LocalizationActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun changeViewsFonts(){
-        Util.changeViewTypeFace(this@HomeActivity, Constants.FONT_REGULAR, toolbarTitle)
+        Util.changeViewTypeFace(this@HomeActivity, Constants.FONT_REGULAR, toolbarTitle,
+                text1, text2, text3)
     }
 
     fun setToolbar(){
