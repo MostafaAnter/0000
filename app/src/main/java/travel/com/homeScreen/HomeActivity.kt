@@ -2,24 +2,26 @@
 package travel.com.homeScreen
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
 import travel.com.R
+import travel.com.flightSearch.FlightSearchActivity
 import travel.com.utility.Constants
 import travel.com.utility.Util
 
-class HomeActivity : LocalizationActivity(), NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     fun Context.toast(message: CharSequence) =
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
@@ -32,7 +34,7 @@ class HomeActivity : LocalizationActivity(), NavigationView.OnNavigationItemSele
                 toast("button2")
             }
             button3 -> {
-                toast("button3")
+                startActivity(Intent(this@HomeActivity, FlightSearchActivity::class.java))
             }
         }
     }

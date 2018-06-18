@@ -3,11 +3,11 @@ package travel.com.splashScreen
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import com.akexorcist.localizationactivity.ui.LocalizationActivity
+import android.support.v7.app.AppCompatActivity
 import travel.com.homeScreen.HomeActivity
 
 
-class SplashActivity : LocalizationActivity() {
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,6 @@ class SplashActivity : LocalizationActivity() {
 
             override fun onPostExecute(aVoid: Void?) {
                 super.onPostExecute(aVoid)
-                setLanguage("ar")
                 val intent = Intent(this@SplashActivity, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
