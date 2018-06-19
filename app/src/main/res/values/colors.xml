@@ -2,13 +2,19 @@
 <resources>
     <color name="colorPrimary">#16002D</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#ED5288</color>
+    <color name="colorAccent">#ed5288</color>
     <color name="backgroundColor">#FAFAFA</color>
 
     <!-- for flight screen -->
     <color name="colorAsPrimary">#16002D</color>
     <color name="colorAsPrimaryDark">#000000</color>
     <color name="colorAviasalesMain">#ED5288</color>
+
+    <!-- gray colors -->
+    <color name="gray">#ebebeb</color>
+    <color name="gray_light">#e8e8e8</color>
+    <color name="gray_transparent">#25a0a3a7</color>
+    <color name="gray_dark_transparent">#ae858585</color>
 
     <color name="aviasales_results_background">@color/grey_background</color>
     <color name="aviasales_search_form_background">@color/white</color>

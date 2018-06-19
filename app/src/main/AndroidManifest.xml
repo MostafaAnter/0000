@@ -18,7 +18,6 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,6 +26,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".flightSearch.FlightSearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".touristesTripResults.TripsResultsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".touristesPopUpFilter.PopUPFilter"
+            android:theme="@style/Theme.UserDialog" />
+        <activity
+            android:name=".touristesTripDetail.TouristesTripDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".touristesTripsFilter.TouristesTripesFilterActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

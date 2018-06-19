@@ -28,7 +28,7 @@ repositories {
 }
 configurations {
     cleanedAnnotations
-    compile.exclude group: 'org.jetbrains' , module:'annotations'
+    compile.exclude group: 'org.jetbrains', module: 'annotations'
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -38,6 +38,9 @@ dependencies {
     implementation 'com.android.support:design:27.1.0'
     implementation 'ru.aviasales.template:aviasalesSdkTemplate:2.1.12'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.crystal:crystalrangeseekbar:1.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

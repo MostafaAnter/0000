@@ -5,11 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -18,6 +16,7 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
 import travel.com.R
 import travel.com.flightSearch.FlightSearchActivity
+import travel.com.touristesTripsFilter.TouristesTripesFilterActivity
 import travel.com.utility.Constants
 import travel.com.utility.Util
 
@@ -28,7 +27,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onClick(p0: View?) {
         when(p0){
             button1 -> {
-                toast("button1")
+                startActivity(Intent(this@HomeActivity, TouristesTripesFilterActivity::class.java))
             }
             button2 -> {
                 toast("button2")

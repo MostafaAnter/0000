@@ -11,8 +11,8 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.view.MenuItem
 import android.view.SubMenu
-
-
+import android.view.View
+import android.widget.Button
 
 
 class Util{
@@ -48,10 +48,12 @@ class Util{
          * @param fontPath path to font.ttf ex. "fonts/normal.ttf" if there fonts directory under assets
          * @param views    that views you want to change it type face should extend text view
          */
-        fun changeViewTypeFace(mContext: Context, fontPath: String, vararg views: TextView) {
+        fun changeViewTypeFace(mContext: Context, fontPath: String, vararg views: View) {
             val font = Typeface.createFromAsset(mContext.getAssets(), fontPath)
             for (v in views) {
-                v.typeface = font
+                (v as? TextView)?.typeface = font
+                if(v is Button)
+                    v.typeface = font
             }
 
         }
