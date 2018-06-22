@@ -30,33 +30,35 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_shape_grey_without_border"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        style="@style/TextAppearance.AppCompat.Medium"
-                        android:text="  احدي رحلات شركة"/>
+                        android:text="  احدي رحلات شركة"
+                        android:textColor="@color/colorPrimary" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorAccent"
                         android:text="ايجبت ترافل"
-                        />
+                        android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="عرض"
                     android:background="#492773"
-                    android:textColor="@android:color/white"/>
+                    android:text="عرض"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
             <LinearLayout
@@ -219,8 +221,184 @@
                         android:adjustViewBounds="true"/>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:text="عن الفندق"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:text="تفاصيل الرحلة"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:text="سياسة الإلغاء"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey_without_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_description_black_24dp"
+                    android:layout_margin="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:text="مرافق متوفرة بالفندق"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
+
+                <LinearLayout
+                    android:id="@+id/noData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="77dp"
+                        android:layout_height="80dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/no_data" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_data"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey_without_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_description_black_24dp"
+                    android:layout_margin="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:text="معلومات هامة"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey_without_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_description_black_24dp"
+                    android:layout_margin="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:text="أراء العملاء"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
+
+                <LinearLayout
+                    android:id="@+id/noData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="77dp"
+                        android:layout_height="80dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/no_data" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_data"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <Button
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:text="أضف تعليق"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@drawable/gradiant_background"
+                android:textColor="@android:color/white"
+                android:text="أحجز الأن"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

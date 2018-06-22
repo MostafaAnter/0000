@@ -15,4 +15,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_trips_results">TripsResultsActivity</string>
     <string name="title_activity_touristes_trip_detail">TouristesTripDetailActivity</string>
+    <string name="no_data">لا يوجد بيانات</string>
 </resources>
