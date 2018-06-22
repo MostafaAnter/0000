@@ -23,7 +23,7 @@ import java.util.*
 
 
 class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener {
-    var cities = arrayOf("Cairo", "Alex", "Sohag", "Qena", "Assuit")
+    var cities = arrayOf("القاهرة", "الاسكندرية", "سوهاج", "قنا", "أسيوط")
 
 
     override fun onClick(p0: View?) {
@@ -41,8 +41,11 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                         .setSingleChoiceItems(cities, 0, DialogInterface.OnClickListener { dialog, which ->
                             // The 'which' argument contains the index position
                             // of the selected item
+                            text2.text = cities.get(which)
                         })
-                builder.setPositiveButton("Okey", { dialog, which -> dialog.dismiss() })
+                builder.setPositiveButton("Okey", { dialog, which ->
+                    dialog.dismiss()
+                 })
                 builder.create().show()
             }
         }
