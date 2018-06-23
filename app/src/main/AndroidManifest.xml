@@ -43,6 +43,9 @@
         <activity
             android:name="travel.com.touristesCompanies.TouristesCompanies"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="travel.com.myBookings.MyBookingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,12 +18,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="شركات سياحية"
+            android:text="حجوزاتي"
             android:textColor="@android:color/white"
             style="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"/>
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/gray_B3B3B3"
+            android:textColor="@color/colorPrimary"
+            android:text="حجوزات سابقة"/>
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/gradiant_background"
+            android:textColor="@android:color/white"
+            android:text="حجوزات حالية"/>
+    </LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_recycler_list"
         android:layout_width="match_parent"
