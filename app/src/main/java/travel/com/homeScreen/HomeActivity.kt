@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent(this@HomeActivity, TouristesTripesFilterActivity::class.java))
             }
             button2 -> {
-                toast("button2")
+                toast("Coming Soon!")
             }
             button3 -> {
                 startActivity(Intent(this@HomeActivity, FlightSearchActivity::class.java))
