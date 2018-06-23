@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="travel.com">
@@ -40,6 +39,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".touristesTripsFilter.TouristesTripesFilterActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="travel.com.touristesCompanies.TouristesCompanies"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

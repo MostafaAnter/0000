@@ -5,17 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:title="رحلات نيلية" />
+            android:id="@+id/show_tourists_companies"
+            android:title="الشركات السياحية" />
         <item
-            android:id="@+id/nav_gallery"
-            android:title="رحلات فرديه" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:title="رحلات نيلية" />
-        <item
-            android:id="@+id/nav_manage"
-            android:title="رحلات نيلية" />
+            android:id="@+id/my_bookings"
+            android:title="حجوزاتى" />
     </group>
 
 </menu>

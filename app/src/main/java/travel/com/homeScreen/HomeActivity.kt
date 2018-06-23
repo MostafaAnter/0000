@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
 import travel.com.R
 import travel.com.flightSearch.FlightSearchActivity
+import travel.com.touristesCompanies.TouristesCompanies
 import travel.com.touristesTripsFilter.TouristesTripesFilterActivity
 import travel.com.utility.Constants
 import travel.com.utility.Util
@@ -69,16 +70,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
+            R.id.show_tourists_companies -> {
                 // Handle the camera action
+                startActivity(Intent(this@HomeActivity, TouristesCompanies::class.java))
+                overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
             }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
+            R.id.my_bookings -> {
 
             }
         }
