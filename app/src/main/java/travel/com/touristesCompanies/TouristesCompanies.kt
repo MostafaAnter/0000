@@ -1,5 +1,6 @@
 package travel.com.touristesCompanies
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
@@ -12,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_touristes_companies.*
 import travel.com.R
+import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
 import travel.com.utility.Constants
 import travel.com.utility.Util
 import java.util.*
@@ -94,7 +96,8 @@ class TouristesCompanies : AppCompatActivity() {
             override fun onItemClick(view: View, position: Int, model: CompanyModel) {
 
                 //handle item click events here
-                Toast.makeText(this@TouristesCompanies, "Hey " + model.title, Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@TouristesCompanies, CompaniesDetailActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
 
             }
