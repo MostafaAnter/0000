@@ -39,6 +39,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text1"
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
+                        android:id="@+id/text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ايجبت ترافل"
@@ -54,6 +56,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/button1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#492773"
@@ -70,18 +73,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/text3"
                         style="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/colorPrimary"
-                        android:text="منتجع شرم كليف"
-                        />
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorAccent"
-                        android:text="4 ايام / 3 ليالي"/>
+                        android:text="منتجع شرم كليف"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4 ايام / 3 ليالي"
+                        android:textColor="@color/colorAccent" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -121,14 +127,16 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_date_range_black_24dp"
                     android:layout_margin="5dp"/>
+
                 <TextView
+                    android:id="@+id/text6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/colorPrimary"
                     android:text="from 10/5/2018 to 12/10/2018"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
@@ -140,25 +148,30 @@
                     android:background="@color/gray"
                     android:adjustViewBounds="true"
                     android:src="@drawable/cdn"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="end|bottom"
-                    android:padding="8dp"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/gradiant_background">
+                    android:background="@drawable/gradiant_background"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
                     <TextView
+                        android:id="@+id/text7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="290 EL"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white" />
+
                     <TextView
+                        android:id="@+id/text8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:text="للفرد"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </FrameLayout>
             <LinearLayout
@@ -225,30 +238,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
+                    android:id="@+id/button2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@android:color/white"
-                    android:text="عن الفندق"/>
+                    android:background="@color/colorPrimary"
+                    android:text="عن الفندق"
+                    android:textColor="@android:color/white" />
+
                 <Button
+                    android:id="@+id/button3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@android:color/white"
-                    android:text="تفاصيل الرحلة"/>
+                    android:background="@color/gray_88333333"
+                    android:text="تفاصيل الرحلة"
+                    android:textColor="@android:color/white" />
+
                 <Button
+                    android:id="@+id/button4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@android:color/white"
-                    android:text="سياسة الإلغاء"/>
+                    android:background="@color/gray_88333333"
+                    android:text="سياسة الإلغاء"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/text9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد"/>
+                android:layout_margin="10dp"
+                android:text="يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -260,14 +284,16 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_description_black_24dp"
                     android:layout_margin="5dp"/>
+
                 <TextView
+                    android:id="@+id/text10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/colorPrimary"
                     android:text="مرافق متوفرة بالفندق"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
@@ -315,19 +341,24 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_description_black_24dp"
                     android:layout_margin="5dp"/>
+
                 <TextView
+                    android:id="@+id/text11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/colorPrimary"
                     android:text="معلومات هامة"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
+
             <TextView
+                android:id="@+id/text12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد"/>
+                android:layout_margin="10dp"
+                android:text="يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد يقع منتجع شرم كليف المميز فقط على مسافة 500 متر من خليج العقبه وبذلك يلعب دورا هاما فى جلب السياحه للوطن العربي ومصر بالتحديد" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -339,14 +370,16 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_description_black_24dp"
                     android:layout_margin="5dp"/>
+
                 <TextView
+                    android:id="@+id/text13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/colorPrimary"
                     android:text="أراء العملاء"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
@@ -385,20 +418,22 @@
             </FrameLayout>
 
             <Button
-                android:layout_gravity="end"
+                android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:text="أضف تعليق"/>
+                android:text="أضف تعليق"
+                android:textColor="@android:color/white" />
 
             <Button
+                android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/gradiant_background"
-                android:textColor="@android:color/white"
-                android:text="أحجز الأن"/>
+                android:text="أحجز الأن"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

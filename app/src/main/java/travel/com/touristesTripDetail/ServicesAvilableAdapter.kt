@@ -5,7 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.item_services_list.view.*
 import travel.com.R
+import travel.com.utility.Constants
+import travel.com.utility.Util
 import java.util.*
 
 
@@ -24,7 +28,7 @@ class ServicesAvilableAdapter(private val mContext: Context, private var modelLi
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_recycler_list, viewGroup, false)
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_services_list, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -67,8 +71,20 @@ class ServicesAvilableAdapter(private val mContext: Context, private var modelLi
         }
 
         fun bindComent(servisesModel: ServisesModel?) {
-            with(servisesModel) {
+            servisesModel?.let {
+                with(it){
+                    itemView.item_txt_title.text = title
+                    itemView.item_txt_message.text = message
 
+                    Glide.with(mContext)   // pass Context
+                            .load(R.drawable.border_shape_grey_without_border) // add your image url
+                            .into(itemView.img_user)
+
+                    // change font
+                    Util.changeViewTypeFace(mContext, Constants.FONT_REGULAR, itemView.item_txt_message)
+                    Util.changeViewTypeFace(mContext, Constants.FONT_BOLD,
+                            itemView.item_txt_title)
+                }
             }
         }
     }

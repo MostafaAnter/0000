@@ -38,7 +38,9 @@ class TouristesTripDetailActivity : AppCompatActivity() {
     }
 
     fun changeViewsFonts(){
-        Util.changeViewTypeFace(this@TouristesTripDetailActivity, Constants.FONT_REGULAR, toolbarTitle)
+        Util.changeViewTypeFace(this@TouristesTripDetailActivity, Constants.FONT_REGULAR, toolbarTitle,
+                text1, text2, text3, text4, ratingValue, text6, text7, text8, text9,
+                text10, text11, text12, text13, button1, button2, button3, button4, button5, button6)
     }
 
     fun setToolbar(){
@@ -51,22 +53,10 @@ class TouristesTripDetailActivity : AppCompatActivity() {
     private fun setServicesAdapter() {
 
 
-        servicesList.add(ServisesModel("Android", "Hello " + " Android"))
-        servicesList.add(ServisesModel("Beta", "Hello " + " Beta"))
-        servicesList.add(ServisesModel("Cupcake", "Hello " + " Cupcake"))
-        servicesList.add(ServisesModel("Donut", "Hello " + " Donut"))
-        servicesList.add(ServisesModel("Eclair", "Hello " + " Eclair"))
-        servicesList.add(ServisesModel("Froyo", "Hello " + " Froyo"))
-        servicesList.add(ServisesModel("Gingerbread", "Hello " + " Gingerbread"))
-        servicesList.add(ServisesModel("Honeycomb", "Hello " + " Honeycomb"))
-        servicesList.add(ServisesModel("Ice Cream Sandwich", "Hello " + " Ice Cream Sandwich"))
-        servicesList.add(ServisesModel("Jelly Bean", "Hello " + " Jelly Bean"))
-        servicesList.add(ServisesModel("KitKat", "Hello " + " KitKat"))
-        servicesList.add(ServisesModel("Lollipop", "Hello " + " Lollipop"))
-        servicesList.add(ServisesModel("Marshmallow", "Hello " + " Marshmallow"))
-        servicesList.add(ServisesModel("Nougat", "Hello " + " Nougat"))
-        servicesList.add(ServisesModel("Android O", "Hello " + " Android O"))
-
+        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
+        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
+        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
+        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
 
         servicesAdapter = ServicesAvilableAdapter(this@TouristesTripDetailActivity, servicesList)
 
@@ -97,26 +87,19 @@ class TouristesTripDetailActivity : AppCompatActivity() {
     private fun setCommentsAdapter() {
 
 
-        commentsList.add(CommentsModel("Android", "Hello " + " Android"))
-        commentsList.add(CommentsModel("Beta", "Hello " + " Beta"))
-        commentsList.add(CommentsModel("Cupcake", "Hello " + " Cupcake"))
-        commentsList.add(CommentsModel("Donut", "Hello " + " Donut"))
-        commentsList.add(CommentsModel("Eclair", "Hello " + " Eclair"))
-        commentsList.add(CommentsModel("Froyo", "Hello " + " Froyo"))
-        commentsList.add(CommentsModel("Gingerbread", "Hello " + " Gingerbread"))
-        commentsList.add(CommentsModel("Honeycomb", "Hello " + " Honeycomb"))
-        commentsList.add(CommentsModel("Ice Cream Sandwich", "Hello " + " Ice Cream Sandwich"))
-        commentsList.add(CommentsModel("Jelly Bean", "Hello " + " Jelly Bean"))
-        commentsList.add(CommentsModel("KitKat", "Hello " + " KitKat"))
-        commentsList.add(CommentsModel("Lollipop", "Hello " + " Lollipop"))
-        commentsList.add(CommentsModel("Marshmallow", "Hello " + " Marshmallow"))
-        commentsList.add(CommentsModel("Nougat", "Hello " + " Nougat"))
-        commentsList.add(CommentsModel("Android O", "Hello " + " Android O"))
-
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
+        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
 
         commentsAdapter = CommentsAdapter(this@TouristesTripDetailActivity, commentsList)
 
         recyclerView2.setHasFixedSize(true)
+        recyclerView2.isNestedScrollingEnabled = false
 
         // use a linear layout manager
 

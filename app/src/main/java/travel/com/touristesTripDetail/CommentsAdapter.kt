@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_recycler_list.view.*
+import kotlinx.android.synthetic.main.item_comments_list.view.*
 import travel.com.R
 import travel.com.utility.CircleTransform
-import java.util.*
-import com.bumptech.glide.load.resource.bitmap.FitCenter
 import travel.com.utility.Constants
 import travel.com.utility.Util
+import java.util.*
 
 
 /**
@@ -30,7 +29,7 @@ class CommentsAdapter(private val mContext: Context, private var modelList: Arra
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_recycler_list, viewGroup, false)
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_comments_list, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -73,8 +72,23 @@ class CommentsAdapter(private val mContext: Context, private var modelList: Arra
         }
 
         fun bindTrip(commentsModel: CommentsModel?) {
-            with(commentsModel) {
+            commentsModel?.let {
+                with(it){
+                    itemView.item_txt_title.text = title
+                    itemView.item_txt_comment.text = message
+                    itemView.item_txt_date.text = "5/3/2018"
 
+                    Glide.with(mContext)   // pass Context
+                            .load(R.color.grey_98000000)
+                            .transform(CircleTransform(mContext))// add your image url
+                            .into(itemView.img_user)
+
+                    // change font
+                    Util.changeViewTypeFace(mContext, Constants.FONT_REGULAR, itemView.item_txt_comment,
+                            itemView.item_txt_date)
+                    Util.changeViewTypeFace(mContext, Constants.FONT_BOLD,
+                            itemView.item_txt_title)
+                }
             }
         }
     }

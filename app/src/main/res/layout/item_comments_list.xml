@@ -22,6 +22,8 @@
         <ImageView
             android:id="@+id/img_user"
             android:layout_width="70dp"
+            android:minHeight="70dp"
+            android:minWidth="70dp"
             android:layout_height="70dp" />
 
         <View
@@ -51,12 +53,12 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Samy fjdslkfjdsl"
+                android:text=""
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/item_txt_message"
+                android:id="@+id/item_txt_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -84,6 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
+        android:layout_margin="10dp"
         android:textColor="@color/colorAsPrimary"
         android:textSize="14sp" />
 
