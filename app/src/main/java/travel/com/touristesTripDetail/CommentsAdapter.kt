@@ -79,7 +79,7 @@ class CommentsAdapter(private val mContext: Context, private var modelList: Arra
                     itemView.item_txt_date.text = "5/3/2018"
 
                     Glide.with(mContext)   // pass Context
-                            .load(R.color.grey_98000000)
+                            .load(R.drawable.cdn)
                             .transform(CircleTransform(mContext))// add your image url
                             .into(itemView.img_user)
 
