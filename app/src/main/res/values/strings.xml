@@ -18,4 +18,5 @@
     <string name="no_data">لا يوجد بيانات</string>
     <string name="title_activity_touristes_companies">TouristesCompanies</string>
     <string name="title_activity_my_bookings">MyBookingsActivity</string>
+    <string name="title_activity_companies_detail">CompaniesDetailActivity</string>
 </resources>

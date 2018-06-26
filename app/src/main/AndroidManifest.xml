@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="travel.com">
@@ -6,19 +7,20 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        tools:replace="android:icon"
         android:name=".app.TravelawyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity
             android:name=".splashScreen.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,15 +38,18 @@
             android:theme="@style/Theme.UserDialog" />
         <activity
             android:name=".touristesTripDetail.TouristesTripDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".touristesTripsFilter.TouristesTripesFilterActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="travel.com.touristesCompanies.TouristesCompanies"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".touristesCompanies.TouristesCompanies"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="travel.com.myBookings.MyBookingsActivity"
+            android:name=".myBookings.MyBookingsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".touristesCompaniesDetails.CompaniesDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
