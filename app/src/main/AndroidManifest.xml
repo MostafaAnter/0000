@@ -50,6 +50,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".touristesCompaniesDetails.CompaniesDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".myBookingsDetails.BookingDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

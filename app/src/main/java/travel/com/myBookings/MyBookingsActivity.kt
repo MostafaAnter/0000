@@ -1,5 +1,6 @@
 package travel.com.myBookings
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.SwipeRefreshLayout
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_my_bookings.*
 import travel.com.R
+import travel.com.myBookingsDetails.BookingDetailsActivity
 import travel.com.utility.Constants
 import travel.com.utility.Util
 import java.util.*
@@ -79,7 +81,7 @@ class MyBookingsActivity : AppCompatActivity() {
 
         mAdapter!!.SetOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener{
             override  fun onItemClick(view: View, position: Int, model: MyBookingsModel) {
-
+                startActivity(Intent(this@MyBookingsActivity, BookingDetailsActivity::class.java))
             }
         })
 
