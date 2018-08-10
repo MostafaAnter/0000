@@ -35,7 +35,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 toast("Coming Soon!")
             }
             button3 -> {
-                startActivity(Intent(this@HomeActivity, FlightSearchActivity::class.java))
+                // startActivity(Intent(this@HomeActivity, FlightSearchActivity::class.java))
+                toast("Coming Soon!")
             }
         }
     }
