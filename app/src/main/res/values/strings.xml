@@ -20,4 +20,5 @@
     <string name="title_activity_my_bookings">MyBookingsActivity</string>
     <string name="title_activity_companies_detail">CompaniesDetailActivity</string>
     <string name="title_activity_booking_details">BookingDetailsActivity</string>
+    <string name="title_activity_book_trip">BookTripActivity</string>
 </resources>

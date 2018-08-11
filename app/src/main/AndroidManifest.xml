@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="travel.com">
 
+    <!-- for internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- for pick photo -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".app.TravelawyApp"
@@ -53,7 +59,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".myBookingsDetails.BookingDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bookTrip.BookTripActivity"
+            android:label="@string/title_activity_book_trip"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

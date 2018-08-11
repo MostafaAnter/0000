@@ -9,16 +9,17 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
+import travel.com.touristesTripsFilter.CountriesResponse;
 
 /**
  * Created by mostafa_anter on 1/1/17.
  */
 
 public interface ApiInterface {
-//    @GET("api/home")
-//    Observable<HomeResponse> getHomeData(@Header("Authorization") String authorization, @Header("Accept") String accept,
-//                                         @Query("fav_teams[]") List<String> fav_teams_ids,
-//                                         @Query("fav_channels[]") List<String> fav_channels_ids);
+    @GET("lists/country")
+    Observable<CountriesResponse> getCountries(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                               @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                               @Header("User-Agent") String userAgent);
 //
 //    @GET("api/home/tomorrow")
 //    Observable<HomeResponse> getHomeTomorrowData(@Header("Authorization") String authorization, @Header("Accept") String accept,

@@ -3,6 +3,7 @@ package travel.com.utility
 import android.content.Context
 import android.graphics.Typeface
 import android.net.ConnectivityManager
+import android.os.AsyncTask
 import android.support.design.widget.NavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -13,6 +14,8 @@ import android.view.MenuItem
 import android.view.SubMenu
 import android.view.View
 import android.widget.Button
+import java.io.*
+import java.util.ArrayList
 
 
 class Util{
@@ -92,4 +95,57 @@ class Util{
         }
 
     }
+
+    class ReadObjectsFromFile<T>(private val code: (mList: List<T>?) -> Unit, private val file: File) : AsyncTask<Void, Void, List<T>?>() {
+
+        override fun doInBackground(vararg voids: Void): List<T>? {
+            try {
+                val inStream = FileInputStream(file)
+                val objectInStream = ObjectInputStream(inStream)
+                val count = objectInStream.readInt() // Get the number of regions
+                val items = ArrayList<T>()
+                for (c in 0 until count)
+                    items.add(objectInStream.readObject() as T)
+                objectInStream.close()
+                return items
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return null
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+                return null
+            }
+
+        }
+
+        override fun onPostExecute(ts: List<T>?) {
+            super.onPostExecute(ts)
+            code(ts)
+        }
+    }
+
+    class saveObjectsInsideFile<T>(private val code: () -> Unit, private val file: File) : AsyncTask<List<T>, Void, Void>() {
+
+        override fun doInBackground(vararg lists: List<T>): Void? {
+            try {
+                val outStream = FileOutputStream(file)
+                val objectOutStream = ObjectOutputStream(outStream)
+                objectOutStream.writeInt(lists[0].size) // Save size first
+                for (item in lists[0])
+                    objectOutStream.writeObject(item)
+                objectOutStream.close()
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+            return null
+        }
+
+        override fun onPostExecute(v: Void) {
+            super.onPostExecute(v)
+            code()
+        }
+    }
+
 }
