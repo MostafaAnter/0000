@@ -9,6 +9,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
+import travel.com.touristesTripsFilter.CitiesResponse;
 import travel.com.touristesTripsFilter.CountriesResponse;
 
 /**
@@ -20,20 +21,21 @@ public interface ApiInterface {
     Observable<CountriesResponse> getCountries(@Header("Accept") String accept, @Header("Authorization") String authorization,
                                                @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                                @Header("User-Agent") String userAgent);
-//
-//    @GET("api/home/tomorrow")
-//    Observable<HomeResponse> getHomeTomorrowData(@Header("Authorization") String authorization, @Header("Accept") String accept,
-//                                                 @Query("fav_teams[]") List<String> fav_teams_ids,
-//                                                 @Query("fav_channels[]") List<String> fav_channels_ids);
-//
-//
-//    @GET("api/ad")
-//    Observable<HomeAdResponse> getHomeTopAd();
-//
-//    @GET("api/channels")
-//    Observable<ChannelsResponse> getChannelsData(@Header("Authorization") String authorization, @Header("Accept") String accept,
-//                                                 @Query("limit") String limit,
-//                                                 @Query("page") String page);
+
+    @GET("lists/city/{country_id}")
+    Observable<CitiesResponse> getCities(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                         @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                         @Header("User-Agent") String userAgent,
+                                         @Path("country_id") int country_id);
+
+    @GET("lists/city/reg/eg")
+    Observable<CitiesResponse> getCitiesOfEgy(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                         @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                         @Header("User-Agent") String userAgent);
+
+
+
+
 //
 //    @GET("api/version")
 //    Observable<NewApkResponse> getApkVersion(@Header("Authorization") String authorization, @Header("Accept") String accept,
@@ -48,17 +50,5 @@ public interface ApiInterface {
 //                                       @Field("scope") String scope);
 //
 //
-//    @GET("api/videos")
-//    Observable<MatchesSammariesResponse> getSammariesData(@Header("Authorization") String authorization,
-//                                                          @Header("Accept") String accept);
-//
-//    @GET("api/videos/2")
-//    Observable<MatchesSammariesResponse> getExplanationsData(@Header("Authorization") String authorization,
-//                                                             @Header("Accept") String accept);
-//
-//    @GET("api/app/ad/{client_id}")
-//    Observable<AdsUnitsResponse> getAdsUnitIds(@Path("client_id") String client_id, @Header("Authorization") String authorization,
-//                                               @Header("Accept") String accept);
-
 
 }

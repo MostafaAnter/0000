@@ -21,13 +21,21 @@ import android.content.DialogInterface
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
 import android.support.v7.app.AlertDialog
+import travel.com.loaders.GetCitiesAsyncTaskLoader
+import travel.com.loaders.GetCitiesOfEgyAsyncTaskLoader
 import travel.com.loaders.GetCountriesAsyncTaskLoader
 import java.util.*
 
 
 class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener {
     var cities: MutableList<String> = mutableListOf()
+    var citiesOfEgy: MutableList<String> = mutableListOf()
     var countries: MutableList<String> = mutableListOf()
+    var countriesObjects: MutableList<CountryItem> = mutableListOf()
+    var citiesObjects: MutableList<CityItem> = mutableListOf()
+    var citiesObjectsOfEgy: MutableList<CityItem> = mutableListOf()
+    var  countryId: Int = 0
+    var IsEgy: Boolean = true
 
 
     override fun onClick(p0: View?) {
@@ -41,16 +49,29 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
             }
             R.id.city_picker -> {
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle("اختر المدينة")
-                        .setSingleChoiceItems(cities.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
-                            // The 'which' argument contains the index position
-                            // of the selected item
-                            text2.text = cities.get(which)
-                        })
-                builder.setPositiveButton("Okey", { dialog, which ->
-                    dialog.dismiss()
-                 })
-                builder.create().show()
+                if (!IsEgy) {
+                    builder.setTitle("اختر المدينة")
+                            .setSingleChoiceItems(cities.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                text2.text = cities.get(which)
+                            })
+                    builder.setPositiveButton("Okey", { dialog, which ->
+                        dialog.dismiss()
+                     })
+                    builder.create().show()
+                } else {
+                    builder.setTitle("اختر المدينة")
+                            .setSingleChoiceItems(citiesOfEgy.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                text2.text = citiesOfEgy.get(which)
+                            })
+                    builder.setPositiveButton("Okey", { dialog, which ->
+                        dialog.dismiss()
+                    })
+                    builder.create().show()
+                }
             }
 
             R.id.country_picker -> {
@@ -59,7 +80,9 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                         .setSingleChoiceItems(countries.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
                             // The 'which' argument contains the index position
                             // of the selected item
-                            text00.text = countries.get(which)
+                            text00.text = countries[which]
+                            countryId = countriesObjects[which].id
+                            supportLoaderManager.initLoader(1, null, getCitiesLoader)
                         })
                 builder.setPositiveButton("Okey", { dialog, which ->
                     dialog.dismiss()
@@ -120,9 +143,12 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
         // Check which radio button was clicked
         when (view.getId()) {
             R.id.radio1 -> {
-                if (checked)
-                // Pirates are the best
+                if (checked){
+                    // Pirates are the best
                     selectCountryView.visibility = View.GONE
+                    IsEgy = true
+                    supportLoaderManager.initLoader(2, null, getCitiesOfEgyLoader)
+                }
                 else{
                     selectCountryView.visibility = View.VISIBLE
                     supportLoaderManager.initLoader(0, null, getCountriesLoader)
@@ -133,6 +159,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                     // Pirates are the best
                     selectCountryView.visibility = View.VISIBLE
                     supportLoaderManager.initLoader(0, null, getCountriesLoader)
+                    IsEgy = false
                 }
                 else{
                     selectCountryView.visibility = View.GONE
@@ -141,8 +168,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
         }
     }
 
-    // Our Callbacks. Could also have the Activity/Fragment implement
-    // LoaderManager.LoaderCallbacks<List<String>>
+    // get countries
     private val getCountriesLoader = object : LoaderManager.LoaderCallbacks<List<CountryItem>> {
         override fun onCreateLoader(
                 id: Int, args: Bundle?): Loader<List<CountryItem>> {
@@ -153,6 +179,12 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                 loader: Loader<List<CountryItem>>, data: List<CountryItem>?) {
             // Display our data, for instance updating our adapter
             if (data != null) {
+                with(countriesObjects){
+                    clear()
+                    data.forEach{
+                        add(it)
+                    }
+                }
                 with(countries){
                     clear()
                     data.forEach{
@@ -172,4 +204,79 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
             // totally acceptable
         }
     }
+
+    // get cities
+    private val getCitiesLoader = object : LoaderManager.LoaderCallbacks<List<CityItem>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<CityItem>> {
+            return GetCitiesAsyncTaskLoader(this@TouristesTripesFilterActivity, countryId)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<CityItem>>, data: List<CityItem>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null) {
+                with(citiesObjects){
+                    clear()
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                with(cities){
+                    clear()
+                    data.forEach{
+                        add(it.text)
+                    }
+                }
+                text2.text = cities[0]
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<CityItem>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+
+    // get citiesOfEgy
+    private val getCitiesOfEgyLoader = object : LoaderManager.LoaderCallbacks<List<CityItem>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<CityItem>> {
+            return GetCitiesOfEgyAsyncTaskLoader(this@TouristesTripesFilterActivity)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<CityItem>>, data: List<CityItem>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null) {
+                with(citiesObjectsOfEgy){
+                    clear()
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                with(citiesOfEgy){
+                    clear()
+                    data.forEach{
+                        add(it.text)
+                    }
+                }
+                text2.text = cities[0]
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<CityItem>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+
 }
