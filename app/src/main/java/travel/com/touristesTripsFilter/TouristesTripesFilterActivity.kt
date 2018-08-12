@@ -215,7 +215,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
         override fun onLoadFinished(
                 loader: Loader<List<CityItem>>, data: List<CityItem>?) {
             // Display our data, for instance updating our adapter
-            if (data != null) {
+            if (data != null && data.isNotEmpty()) {
                 with(citiesObjects){
                     clear()
                     data.forEach{
@@ -252,7 +252,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
         override fun onLoadFinished(
                 loader: Loader<List<CityItem>>, data: List<CityItem>?) {
             // Display our data, for instance updating our adapter
-            if (data != null) {
+            if (data != null && data.isNotEmpty()) {
                 with(citiesObjectsOfEgy){
                     clear()
                     data.forEach{
@@ -265,7 +265,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                         add(it.text)
                     }
                 }
-                text2.text = cities[0]
+                text2.text = citiesOfEgy[0]
             }
         }
 
