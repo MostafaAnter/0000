@@ -48,7 +48,11 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.button1 -> {
-                startActivity(Intent(this@TouristesTripesFilterActivity, TripsResultsActivity::class.java))
+                startActivity(Intent(this@TouristesTripesFilterActivity, TripsResultsActivity::class.java)
+                        .putExtra("date", date)
+                        .putExtra("region", region)
+                        .putExtra("country_id", country_id)
+                        .putExtra("city_id", city_id))
             }
             R.id.date_picker ->{
                 val newFragment = DatePickerFragment()
