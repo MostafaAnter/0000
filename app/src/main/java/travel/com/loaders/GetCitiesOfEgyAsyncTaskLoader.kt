@@ -60,7 +60,6 @@ class GetCitiesOfEgyAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<Cit
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<CitiesResponse>() {
                     override fun onCompleted() {
-                        Log.e("error", "complete")
                     }
 
                     override fun onError(e: Throwable) {

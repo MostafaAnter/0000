@@ -34,8 +34,15 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
     var countriesObjects: MutableList<CountryItem> = mutableListOf()
     var citiesObjects: MutableList<CityItem> = mutableListOf()
     var citiesObjectsOfEgy: MutableList<CityItem> = mutableListOf()
-    var  countryId: Int = 0
-    var IsEgy: Boolean = true
+    var isEgy: Boolean = true
+
+
+    // vars for search
+    var date: String = ""
+    var region: String = ""
+    var country_id: String = ""
+    var city_id: String = ""
+
 
 
     override fun onClick(p0: View?) {
@@ -49,7 +56,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
             }
             R.id.city_picker -> {
                 val builder = AlertDialog.Builder(this)
-                if (!IsEgy) {
+                if (!isEgy) {
                     builder.setTitle("اختر المدينة")
                             .setSingleChoiceItems(cities.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
                                 // The 'which' argument contains the index position
@@ -63,9 +70,16 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                 } else {
                     builder.setTitle("اختر المدينة")
                             .setSingleChoiceItems(citiesOfEgy.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
-                                // The 'which' argument contains the index position
-                                // of the selected item
+
                                 text2.text = citiesOfEgy.get(which)
+
+                                if (isEgy) {
+                                    country_id = citiesObjectsOfEgy[which].countryId
+                                    city_id = citiesObjectsOfEgy[which].id.toString()
+                                } else {
+                                    country_id = citiesObjects[which].countryId
+                                    city_id = citiesObjects[which].id.toString()
+                                }
                             })
                     builder.setPositiveButton("Okey", { dialog, which ->
                         dialog.dismiss()
@@ -78,11 +92,13 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("اختر الدولة")
                         .setSingleChoiceItems(countries.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
-                            // The 'which' argument contains the index position
-                            // of the selected item
+                            // reset cities
+                            text2.text = "-"
+                            country_id = countriesObjects[which].id.toString()
+                            city_id = ""
+
                             text00.text = countries[which]
-                            countryId = countriesObjects[which].id
-                            supportLoaderManager.initLoader(1, null, getCitiesLoader)
+                            supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getCitiesLoader)
                         })
                 builder.setPositiveButton("Okey", { dialog, which ->
                     dialog.dismiss()
@@ -105,6 +121,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
         date_picker.setOnClickListener(this)
         city_picker.setOnClickListener(this)
 
+        if (savedInstanceState == null)
         onRadioButtonClicked(radio1)
     }
 
@@ -120,8 +137,8 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: MessageEvent) {
-
-     text4.text = "${event.year}/${event.month}/${event.day}"
+        date =  "${event.day}/${event.month}/${event.year}"
+        text4.text= "${event.year}/${event.month}/${event.day}"
     }
 
     fun changeViewsFonts(){
@@ -146,7 +163,8 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                 if (checked){
                     // Pirates are the best
                     selectCountryView.visibility = View.GONE
-                    IsEgy = true
+                    isEgy = true
+                    region = "eg"
                     supportLoaderManager.initLoader(2, null, getCitiesOfEgyLoader)
                 }
                 else{
@@ -157,9 +175,10 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
             R.id.radio2 -> {
                 if (checked) {
                     // Pirates are the best
+                    region = ""
                     selectCountryView.visibility = View.VISIBLE
                     supportLoaderManager.initLoader(0, null, getCountriesLoader)
-                    IsEgy = false
+                    isEgy = false
                 }
                 else{
                     selectCountryView.visibility = View.GONE
@@ -192,6 +211,11 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                     }
                 }
                 text00.text = countries[0]
+
+                text2.text = "-"
+                country_id = countriesObjects[0].id.toString()
+                city_id = ""
+                supportLoaderManager.initLoader(1, null, getCitiesLoader)
             }
         }
 
@@ -209,7 +233,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
     private val getCitiesLoader = object : LoaderManager.LoaderCallbacks<List<CityItem>> {
         override fun onCreateLoader(
                 id: Int, args: Bundle?): Loader<List<CityItem>> {
-            return GetCitiesAsyncTaskLoader(this@TouristesTripesFilterActivity, countryId)
+            return GetCitiesAsyncTaskLoader(this@TouristesTripesFilterActivity, country_id.toInt())
         }
 
         override fun onLoadFinished(
@@ -229,6 +253,8 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                     }
                 }
                 text2.text = cities[0]
+                city_id = citiesObjects[0].id.toString()
+                country_id = citiesObjects[0].countryId
             }
         }
 
@@ -266,6 +292,8 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                     }
                 }
                 text2.text = citiesOfEgy[0]
+                country_id = citiesObjectsOfEgy[0].countryId
+                city_id = citiesObjectsOfEgy[0].id.toString()
             }
         }
 
@@ -277,6 +305,18 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
             // so a completely empty onLoaderReset() is
             // totally acceptable
         }
+    }
+
+    public override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        savedInstanceState.putBoolean("isEgy", isEgy)
+        savedInstanceState.putString("date", date)
+        savedInstanceState.putString("region", region)
+        savedInstanceState.putString("country_id", country_id)
+        savedInstanceState.putString("city_id", city_id)
+
+
+        //declare values before saving the state
+        super.onSaveInstanceState(savedInstanceState)
     }
 
 }

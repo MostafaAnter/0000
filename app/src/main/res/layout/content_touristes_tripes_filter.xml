@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:gravity="center"
+            android:paddingBottom="80dp"
             android:orientation="vertical">
 
             <ImageView
@@ -81,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
 

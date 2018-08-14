@@ -3,6 +3,7 @@ package travel.com.loaders
 
 import android.content.Context
 import android.support.v4.content.AsyncTaskLoader
+import android.util.Log
 import rx.Subscriber
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -63,7 +64,7 @@ class GetCitiesAsyncTaskLoader(context: Context, private val country_id: Int) : 
                     }
 
                     override fun onError(e: Throwable) {
-
+                        Log.e("error", e.message)
                     }
 
                     override fun onNext(getCountriesResult: CitiesResponse) {
