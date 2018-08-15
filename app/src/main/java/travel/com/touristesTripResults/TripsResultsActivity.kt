@@ -39,6 +39,12 @@ class TripsResultsActivity : AppCompatActivity() {
 
     private val modelList = ArrayList<TripItemModel>()
 
+    // vars for search
+    var date: String = ""
+    var region: String = ""
+    var country_id: String = ""
+    var city_id: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

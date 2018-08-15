@@ -11,6 +11,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_touristes_trip_detail.*
 import kotlinx.android.synthetic.main.content_touristes_trip_detail.*
 import travel.com.R
+import travel.com.bookTrip.BookTripActivity
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
 import travel.com.utility.Constants
 import travel.com.utility.Util
@@ -18,10 +19,12 @@ import java.util.*
 
 class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.button1 -> {
-                startActivity(Intent(this@TouristesTripDetailActivity, CompaniesDetailActivity::class.java).
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                startActivity(Intent(this@TouristesTripDetailActivity, CompaniesDetailActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+            }
+            R.id.button6 -> {
+                startActivity(Intent(this@TouristesTripDetailActivity, BookTripActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
     }
@@ -35,7 +38,6 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
     private val commentsList = ArrayList<CommentsModel>()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_touristes_trip_detail)
@@ -47,15 +49,16 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
         setServicesAdapter()
 
         button1.setOnClickListener(this)
+        button6.setOnClickListener(this)
     }
 
-    fun changeViewsFonts(){
+    fun changeViewsFonts() {
         Util.changeViewTypeFace(this@TouristesTripDetailActivity, Constants.FONT_REGULAR, toolbarTitle,
                 text1, text2, text3, text4, ratingValue, text6, text7, text8, text9,
                 text10, text11, text12, text13, button1, button2, button3, button4, button5, button6)
     }
 
-    fun setToolbar(){
+    fun setToolbar() {
         Util.manipulateToolbar(this@TouristesTripDetailActivity, toolbar,
                 R.drawable.ic_arrow_back_wight_24dp, {
             finish()
@@ -96,6 +99,7 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
 
 
     }
+
     private fun setCommentsAdapter() {
 
 

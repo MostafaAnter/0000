@@ -9,8 +9,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recycler_list.view.*
 import travel.com.R
 import travel.com.utility.CircleTransform
-import java.util.*
-import com.bumptech.glide.load.resource.bitmap.FitCenter
 import travel.com.utility.Constants
 import travel.com.utility.Util
 
