@@ -1,6 +1,7 @@
 package travel.com.utility;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
 
@@ -53,6 +54,21 @@ public class SweetDialogHelper {
         pDialog.setTitleText(title)
                 .setContentText(message)
                 .setConfirmText(confirmMessage)
+                .show();
+    }
+
+    public void showSuccessfulMessage(String title, String message, Drawable drawable, final DoAction action) {
+        pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE);
+        pDialog.setTitleText(title)
+                .setContentText(message)
+                .setCustomImage(drawable)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        action.doSomeThing();
+                        sDialog.dismissWithAnimation();
+                    }
+                })
                 .show();
     }
 

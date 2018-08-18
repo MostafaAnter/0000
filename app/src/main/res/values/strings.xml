@@ -21,4 +21,6 @@
     <string name="title_activity_companies_detail">CompaniesDetailActivity</string>
     <string name="title_activity_booking_details">BookingDetailsActivity</string>
     <string name="title_activity_book_trip">BookTripActivity</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="title_activity_sign_out">SignOutActivity</string>
 </resources>

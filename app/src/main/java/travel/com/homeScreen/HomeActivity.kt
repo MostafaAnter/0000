@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.content_home.*
 import travel.com.R
 import travel.com.flightSearch.FlightSearchActivity
 import travel.com.myBookings.MyBookingsActivity
+import travel.com.signIn.SignInActivity
 import travel.com.touristesCompanies.TouristesCompanies
 import travel.com.touristesTripsFilter.TouristesTripesFilterActivity
 import travel.com.utility.Constants
@@ -78,7 +79,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
             }
             R.id.my_bookings -> {
-                startActivity(Intent(this@HomeActivity, MyBookingsActivity::class.java))
+                startActivity(Intent(this@HomeActivity, SignInActivity::class.java))
                 overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
             }
         }

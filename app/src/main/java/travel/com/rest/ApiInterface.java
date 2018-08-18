@@ -9,6 +9,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
+import travel.com.signIn.SignInResponse;
 import travel.com.touristesTripsFilter.CitiesResponse;
 import travel.com.touristesTripsFilter.CountriesResponse;
 
@@ -33,22 +34,11 @@ public interface ApiInterface {
                                          @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                          @Header("User-Agent") String userAgent);
 
-
-
-
-//
-//    @GET("api/version")
-//    Observable<NewApkResponse> getApkVersion(@Header("Authorization") String authorization, @Header("Accept") String accept,
-//                                             @Query("current") String current);
-//
-//
-//    @FormUrlEncoded
-//    @POST("oauth/token")
-//    Observable<TokenResponse> getToken(@Field("grant_type") String grant_type,
-//                                       @Field("client_id") String client_id,
-//                                       @Field("client_secret") String client_secret,
-//                                       @Field("scope") String scope);
-//
-//
+    @FormUrlEncoded
+    @POST("login")
+    Observable<SignInResponse> login(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                     @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                     @Header("User-Agent") String userAgent, @Field("email") String email,
+                                     @Field("password") String password);
 
 }

@@ -63,7 +63,17 @@
         <activity
             android:name=".bookTrip.BookTripActivity"
             android:label="@string/title_activity_book_trip"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".signIn.SignInActivity"
+            android:label="@string/title_activity_sign_in"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".signUp.SignUpActivity"
+            android:label="@string/title_activity_sign_out"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
