@@ -40,5 +40,12 @@ public interface ApiInterface {
                                      @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                      @Header("User-Agent") String userAgent, @Field("email") String email,
                                      @Field("password") String password);
+    @FormUrlEncoded
+    @POST("register")
+    Observable<SignInResponse> SignUp(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                     @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                     @Header("User-Agent") String userAgent, @Field("name") String name,
+                                     @Field("email") String email, @Field("mobile") String mobile,
+                                      @Field("password") String password, @Field("password_confirmation") String passwordConfirmation);
 
 }

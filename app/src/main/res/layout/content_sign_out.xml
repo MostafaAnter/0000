@@ -9,16 +9,6 @@
     tools:context=".signUp.SignUpActivity"
     tools:showIn="@layout/activity_sign_out">
 
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -38,70 +28,121 @@
 
             <ImageView
                 android:id="@+id/top_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:contentDescription="@null" />
+            <Button
+                android:id="@+id/addPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:contentDescription="@null"
-                android:src="@drawable/login_title" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_shape_grey"
-                    android:hint="البريد الإلكتروني"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:padding="12dp"
-                    android:singleLine="true"
-                    android:textSize="12sp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:background="@drawable/border_shape_grey"
-                    android:hint="الرقم السري"
-                    android:imeActionId="6"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:padding="12dp"
-                    android:singleLine="true"
-                    android:textSize="12sp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:text="أضف صورتك"/>
             <TextView
-                android:id="@+id/sign_up_button"
-                style="@style/TextAppearance.AppCompat.Small"
+                android:id="@+id/text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="هل أنت مستخدم جديد؟ .. سجل معنا الأن"
-                android:textColor="@color/colorAccent" />
+                android:text="الأسم كامل"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.AppCompat.Medium"/>
 
+            <EditText
+                android:id="@+id/fullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="رقم التليفون"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="البريد الإلكتروني"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="الرقم السري"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/border_shape_grey"
+                android:imeActionId="6"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/email_sign_up_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:background="@color/colorAccent"
-                android:text="دخول"
+                android:text="تسجيل"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>

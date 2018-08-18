@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+//for permission dispatcher annotation
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -55,6 +58,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'io.reactivex:rxandroid:1.2.1'
+//    pick image
+    implementation 'me.iwf.photopicker:PhotoPicker:0.9.5@aar'
+//    permission dispatcher
+    implementation "com.github.hotchemi:permissionsdispatcher:$dispatcher_version"
+    kapt "com.github.hotchemi:permissionsdispatcher-processor:$dispatcher_version"
+
     implementation 'com.github.f0ris.sweetalert:library:1.5.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

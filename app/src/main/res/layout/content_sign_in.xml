@@ -9,16 +9,6 @@
     tools:context=".signIn.SignInActivity"
     tools:showIn="@layout/activity_sign_in">
 
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -44,7 +34,6 @@
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:contentDescription="@null"
                 android:src="@drawable/login_title" />
-
             <TextView
                 android:id="@+id/text1"
                 android:layout_width="match_parent"
@@ -55,17 +44,17 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary"
                 style="@style/TextAppearance.AppCompat.Medium"/>
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_shape_grey"
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_shape_grey"
 
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:padding="12dp"
-                    android:singleLine="true"
-                    android:textSize="12sp" />
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/text2"
@@ -79,18 +68,18 @@
                 android:textColor="@color/colorPrimary"
                 style="@style/TextAppearance.AppCompat.Medium"/>
 
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:background="@drawable/border_shape_grey"
-                    android:imeActionId="6"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:padding="12dp"
-                    android:singleLine="true"
-                    android:textSize="12sp" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/border_shape_grey"
+                android:imeActionId="6"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
 
 
 

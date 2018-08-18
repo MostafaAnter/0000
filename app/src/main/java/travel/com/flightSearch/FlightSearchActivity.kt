@@ -1,6 +1,7 @@
 package travel.com.flightSearch
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_flight_search.*
 import travel.com.R
@@ -40,7 +41,7 @@ class FlightSearchActivity : AppCompatActivity() {
         }
 
         val fragmentTransaction = fm.beginTransaction() // adding fragment to fragment manager
-        fragmentTransaction.replace(R.id.fragment_place, aviasalesFragment, AviasalesFragment.TAG)
+        fragmentTransaction.replace(R.id.fragment_place, aviasalesFragment as Fragment, AviasalesFragment.TAG)
         fragmentTransaction.commit()
     }
     fun changeViewsFonts(){
