@@ -201,13 +201,31 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
 //        return byteBuff.toByteArray()
 //    }
 
+    @Throws(IOException::class)
+    fun getBytes(inputStream: InputStream): ByteArray {
+        val byteBuff = ByteArrayOutputStream()
+
+        val buffSize = 1024
+        val buff = ByteArray(buffSize)
+
+        var len = 0
+        while ({len = inputStream.read(buff); len}() != -1) {
+            byteBuff.write(buff, 0, len)
+        }
+
+        return byteBuff.toByteArray()
+    }
+
     fun registerNormal(sdh: SweetDialogHelper, mContext: Context) {
         sdh.showMaterialProgress(getString(R.string.loading))
 
 
         // image as file
         val file = File(profileImagePath)
-        val filePart = MultipartBody.Part.createFormData("image", file.name, RequestBody.create(MediaType.parse("image/*"), file))
+        val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
+        val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), getBytes(inputStream))
+        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+        Log.d("nama file e cuk", file.name)
 
         val signup = apiService?.signUp(BuildConfig.Header_Accept,
                 BuildConfig.Header_Authorization, BuildConfig.From,
@@ -217,7 +235,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                 RequestBody.create(MediaType.parse("text/plain"), user_mobile),
                 RequestBody.create(MediaType.parse("text/plain"), user_password),
                 RequestBody.create(MediaType.parse("text/plain"), user_password),
-                filePart)
+                body)
 
         if (signup != null) {
             subscription1 = signup
