@@ -11,8 +11,10 @@ import rx.schedulers.Schedulers
 import travel.com.BuildConfig
 import travel.com.rest.ApiClient
 import travel.com.rest.ApiInterface
+import travel.com.store.TravellawyPrefStore
 import travel.com.touristesTripsFilter.CitiesResponse
 import travel.com.touristesTripsFilter.CityItem
+import travel.com.utility.Constants
 import travel.com.utility.Util
 import java.io.*
 
@@ -29,10 +31,12 @@ class GetCitiesOfEgyAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<Cit
     // for retrofit request
     private var subscription: Subscription? = null
     private val apiService: ApiInterface
+    private lateinit var store: TravellawyPrefStore
 
     init {
         // get apiService
         apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        store = TravellawyPrefStore(context)
     }
 
     override fun onStartLoading() {
@@ -53,7 +57,7 @@ class GetCitiesOfEgyAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<Cit
 
     override fun loadInBackground(): List<CityItem>? {
         val getCitiesOfEgy = apiService.getCitiesOfEgy(BuildConfig.Header_Accept,
-                BuildConfig.Header_Authorization, BuildConfig.From,
+                store.getPreferenceValue(Constants.AUTHORIZATION, "empty"), BuildConfig.From,
                 BuildConfig.Accept_Language, BuildConfig.User_Agent)
         subscription = getCitiesOfEgy
                 .subscribeOn(Schedulers.newThread())

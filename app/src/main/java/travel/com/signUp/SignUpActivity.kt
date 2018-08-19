@@ -228,7 +228,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("nama file e cuk", file.name)
 
         val signup = apiService?.signUp(BuildConfig.Header_Accept,
-                BuildConfig.Header_Authorization, BuildConfig.From,
+                TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                BuildConfig.From,
                 BuildConfig.Accept_Language, BuildConfig.User_Agent,
                 RequestBody.create(MediaType.parse("text/plain"), user_full_name),
                 RequestBody.create(MediaType.parse("text/plain"), user_email),

@@ -69,6 +69,14 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                 email, password, sign_up_button, email_sign_in_button, text1, text2)
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (!TravellawyPrefStore(this).getPreferenceValue(Constants.AUTHORIZATION, "empty")
+                        !!.contentEquals("empty")) {
+            finish()
+        }
+    }
+
     fun setToolbar() {
         Util.manipulateToolbar(this@SignInActivity, toolbar,
                 R.drawable.ic_arrow_back_wight_24dp, {
@@ -112,7 +120,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     private fun loginNormal(sdh: SweetDialogHelper, mContext: Context) {
         sdh.showMaterialProgress(getString(R.string.loading))
         val loginNormal = apiService?.login(BuildConfig.Header_Accept,
-                BuildConfig.Header_Authorization, BuildConfig.From,
+                TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                BuildConfig.From,
                 BuildConfig.Accept_Language, BuildConfig.User_Agent, user_email, user_passsword)
         subscription1 = loginNormal
                 ?.subscribeOn(Schedulers.newThread())
@@ -128,7 +137,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                     }
 
                     override fun onNext(signUpResult: SignInResponse?) {
-                        if (signUpResult?.code == 102 || signUpResult?.item == null){
+                        if (signUpResult?.code != 100 || signUpResult?.item == null){
                             sdh.dismissDialog()
                             sdh.showErrorMessage("فشل!", signUpResult?.message)
                             return
@@ -137,37 +146,10 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                         signUpResult?.item?.authorization?.let { TravellawyPrefStore(mContext).addPreference(Constants.AUTHORIZATION, it) }
                         signUpResult?.item?.id?.let { TravellawyPrefStore(mContext).addPreference(Constants.USER_ID, it) }
 
-
-                        Glide.with(mContext)
-                                .load(signUpResult?.item?.image)
-                                .asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .listener(object : RequestListener<String, Bitmap> {
-                                    override fun onException(e: Exception?, model: String?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
-                                        sdh.dismissDialog()
-                                        sdh.showSuccessfulMessage("Welcome!", signUpResult?.item?.name) {
-                                           finish()
-                                        }
-                                        return false
-                                    }
-
-                                    override fun onResourceReady(resource: Bitmap?, model: String?, target: Target<Bitmap>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                                        return true
-                                    }
-
-                                })
-                                .into(object : SimpleTarget<Bitmap>(){
-                                    override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                                        sdh.dismissDialog()
-                                        sdh.showSuccessfulMessage("Welcome!", signUpResult?.item?.name, BitmapDrawable(this@SignInActivity.resources, resource)) {
-                                            finish()
-                                        }
-                                    }
-
-                                })
-
-
-
+                        sdh.dismissDialog()
+                        sdh.showSuccessfulMessage("Welcome!", signUpResult?.item?.name) {
+                            finish()
+                        }
 
                     }
                 })

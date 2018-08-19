@@ -38,8 +38,8 @@ public class TravellawyPrefStore {
         editor.apply();
     }
 
-    public String getPreferenceValue(String key){
-        return thePlacePrefStore.getString(key, "");
+    public String getPreferenceValue(String key, String default_string){
+        return thePlacePrefStore.getString(key, default_string);
     }
 
     public int getIntPreferenceValue(String key){
