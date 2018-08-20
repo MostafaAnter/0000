@@ -16,6 +16,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 import travel.com.signIn.SignInResponse;
+import travel.com.touristesCompanies.models.CommentResponse;
+import travel.com.touristesCompanies.models.CompaniesResponse;
+import travel.com.touristesCompanies.models.RateResponse;
 import travel.com.touristesTripResults.models.SearchResults;
 import travel.com.touristesTripsFilter.CitiesResponse;
 import travel.com.touristesTripsFilter.CountriesResponse;
@@ -57,6 +60,59 @@ public interface ApiInterface {
                                      @Query("has_internet") String has_internet,
                                      @Query("has_parking") String has_parking,
                                      @Query("allow_pets") String allow_pets);
+
+
+    @GET("companies")
+    Observable<CompaniesResponse> getCompanies(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                               @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                               @Header("User-Agent") String userAgent);
+
+
+    @FormUrlEncoded
+    @POST("companies/comment")
+    Observable<CommentResponse> commentOnCompany(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                 @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                 @Header("User-Agent") String userAgent, @Field("company_id") String company_id,
+                                                 @Field("comment") String comment);
+
+
+    @FormUrlEncoded
+    @POST("companies/rate")
+    Observable<RateResponse> rateOnCompany(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                           @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                           @Header("User-Agent") String userAgent, @Field("company_id") String company_id,
+                                           @Field("rate") String rate);
+
+
+
+    /*1 للغرفة الفردية 2 للغرفة المزدوجة 3 للغرفة الثلاثية وخلى بالك يعنى لما يكون عدد الغرف 2 يكون فية 2 ولازم يختار النوع بتاع كل غرفة
+
+child_ages[]2
+هيبقى 2 فئات عمرية 1 ( 0 الى 5) سنوات و 2 (5 الى 11) سنوات وبرضوا هيتوقف على عدد الاطفال
+
+payment_method1
+هتبقى 2 يا اما هيبقى 1 الدفع عن طريق احد مكاتبنا 2 الدفع كاش عن طريق احد مندوبينا
+
+notefdsf
+دى هتبقى يعنى يكتب ملاحظاتة*/
+
+    @FormUrlEncoded
+    @POST("trips/reservation")
+    Observable<RateResponse> reserveTrip(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                         @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                         @Header("User-Agent") String userAgent,
+                                         @Field("trip_id") String trip_id,
+                                         @Field("adult_count") String adult_count,
+                                         @Field("child_count") String child_count,
+                                         @Field("room_count") String room_count,
+                                         @Field("room_types[]") List<String> room_types,
+                                         @Field("child_ages[]") List<String> child_ages,
+                                         @Field("payment_method") String payment_method,
+                                         @Field("note") String note);
+
+
+    /*دا لعرض الرحلات المحجوزة للعضو طيب لو عايز بقى تعمل لحالة معينة يبقى url/0 'r_status_0' => ' فى انتظار السعر ', 'r_status_1' => ' فى انتظار تاكيد العميل', 'r_status_2' => ' فى انتظار تاكيد الدفع ', 'r_status_3' => ' تم الحجز ',*/
+
 
 
     @FormUrlEncoded
