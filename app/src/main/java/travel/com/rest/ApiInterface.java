@@ -16,6 +16,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 import travel.com.signIn.SignInResponse;
+import travel.com.touristesTripResults.models.SearchResults;
 import travel.com.touristesTripsFilter.CitiesResponse;
 import travel.com.touristesTripsFilter.CountriesResponse;
 
@@ -37,8 +38,26 @@ public interface ApiInterface {
 
     @GET("lists/city/reg/eg")
     Observable<CitiesResponse> getCitiesOfEgy(@Header("Accept") String accept, @Header("Authorization") String authorization,
-                                         @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
-                                         @Header("User-Agent") String userAgent);
+                                              @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                              @Header("User-Agent") String userAgent);
+
+    @GET
+    Observable<SearchResults> search(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                     @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                     @Header("User-Agent") String userAgent,
+                                     @Query("date") String date,
+                                     @Query("price_from") String price_from,
+                                     @Query("price_to") String price_to,
+                                     @Query("category_id") String category_id,
+                                     @Query("sub_category_id") String sub_category_id,
+                                     @Query("region") String region,
+                                     @Query("member_id") String member_id,
+                                     @Query("country_id") String country_id,
+                                     @Query("city_id") String city_id,
+                                     @Query("has_internet") String has_internet,
+                                     @Query("has_parking") String has_parking,
+                                     @Query("allow_pets") String allow_pets);
+
 
     @FormUrlEncoded
     @POST("login")
@@ -46,6 +65,7 @@ public interface ApiInterface {
                                      @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                      @Header("User-Agent") String userAgent, @Field("email") String email,
                                      @Field("password") String password);
+
     @Multipart
     @POST("register")
     Observable<SignInResponse> signUp(@Header("Accept") String accept,
