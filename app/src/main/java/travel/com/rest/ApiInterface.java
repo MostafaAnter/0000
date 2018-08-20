@@ -15,13 +15,18 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
+import travel.com.bookTrip.models.ReservationResponse;
+import travel.com.myBookings.models.MyReservationsResponse;
 import travel.com.signIn.SignInResponse;
 import travel.com.touristesCompanies.models.CommentResponse;
 import travel.com.touristesCompanies.models.CompaniesResponse;
 import travel.com.touristesCompanies.models.RateResponse;
+import travel.com.touristesTripDetail.models.TripCommentResponse;
 import travel.com.touristesTripResults.models.SearchResults;
 import travel.com.touristesTripsFilter.CitiesResponse;
 import travel.com.touristesTripsFilter.CountriesResponse;
+import travel.com.touristesTripsFilter.models.TripCategoriesResponse;
+import travel.com.touristesTripsFilter.models.TripSubCategoryResponse;
 
 /**
  * Created by mostafa_anter on 1/1/17.
@@ -43,6 +48,18 @@ public interface ApiInterface {
     Observable<CitiesResponse> getCitiesOfEgy(@Header("Accept") String accept, @Header("Authorization") String authorization,
                                               @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                               @Header("User-Agent") String userAgent);
+
+    @GET("lists/category")
+    Observable<TripCategoriesResponse> getTripsCategories(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                          @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                          @Header("User-Agent") String userAgent);
+
+    @GET("lists/sub_category/{category_id}")
+    Observable<TripSubCategoryResponse> getTripsSubCategories(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                              @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                              @Header("User-Agent") String userAgent,
+                                                              @Path("category_id") int category_id);
+
 
     @GET
     Observable<SearchResults> search(@Header("Accept") String accept, @Header("Authorization") String authorization,
@@ -98,20 +115,40 @@ notefdsf
 
     @FormUrlEncoded
     @POST("trips/reservation")
-    Observable<RateResponse> reserveTrip(@Header("Accept") String accept, @Header("Authorization") String authorization,
-                                         @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
-                                         @Header("User-Agent") String userAgent,
-                                         @Field("trip_id") String trip_id,
-                                         @Field("adult_count") String adult_count,
-                                         @Field("child_count") String child_count,
-                                         @Field("room_count") String room_count,
-                                         @Field("room_types[]") List<String> room_types,
-                                         @Field("child_ages[]") List<String> child_ages,
-                                         @Field("payment_method") String payment_method,
-                                         @Field("note") String note);
+    Observable<ReservationResponse> reserveTrip(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                @Header("User-Agent") String userAgent,
+                                                @Field("trip_id") String trip_id,
+                                                @Field("adult_count") String adult_count,
+                                                @Field("child_count") String child_count,
+                                                @Field("room_count") String room_count,
+                                                @Field("room_types[]") List<String> room_types,
+                                                @Field("child_ages[]") List<String> child_ages,
+                                                @Field("payment_method") String payment_method,
+                                                @Field("note") String note);
 
 
     /*دا لعرض الرحلات المحجوزة للعضو طيب لو عايز بقى تعمل لحالة معينة يبقى url/0 'r_status_0' => ' فى انتظار السعر ', 'r_status_1' => ' فى انتظار تاكيد العميل', 'r_status_2' => ' فى انتظار تاكيد الدفع ', 'r_status_3' => ' تم الحجز ',*/
+
+    @GET("member/reservations/")
+    Observable<MyReservationsResponse> getReservations(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                       @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                       @Header("User-Agent") String userAgent);
+
+    @FormUrlEncoded
+    @POST("trips/comment")
+    Observable<TripCommentResponse> commentOnTrip(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                  @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                  @Header("User-Agent") String userAgent, @Field("trip_id") String trip_id,
+                                                  @Field("comment") String comment);
+
+    @FormUrlEncoded
+    @POST("trips/rate")
+    Observable<RateResponse> rateOnTrip(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                           @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                           @Header("User-Agent") String userAgent, @Field("trip_id") String company_id,
+                                           @Field("rate") String rate);
+
 
 
 
