@@ -1,3 +1,3 @@
 package travel.com.myBookings.models
 
-data class ChildAges(val : String = "")
+data class ChildAges(val childAges: String = "")

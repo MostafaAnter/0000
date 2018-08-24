@@ -12,7 +12,9 @@ import kotlinx.android.synthetic.main.activity_my_bookings.*
 import travel.com.R
 import travel.com.myBookingsDetails.BookingDetailsActivity
 import travel.com.utility.Constants
+import travel.com.utility.EndlessRecyclerViewScrollListener
 import travel.com.utility.Util
+import travel.com.utility.toast
 import java.util.*
 
 
@@ -23,13 +25,16 @@ class MyBookingsActivity : AppCompatActivity() {
     private var mAdapter: RecyclerViewAdapter? = null
     private val modelList = ArrayList<MyBookingsModel>()
 
+    // for load more data
+    val layoutManager = LinearLayoutManager(this)
+    private lateinit var scrollListener: EndlessRecyclerViewScrollListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_bookings)
         findViews()
         changeViewsFonts()
         setToolbar()
-        setAdapter()
 
         swipeRefreshRecyclerList!!.setOnRefreshListener {
             // Do your stuff on refresh
@@ -38,6 +43,16 @@ class MyBookingsActivity : AppCompatActivity() {
                     swipeRefreshRecyclerList!!.isRefreshing = false
             }, 5000)
         }
+
+        // set scroll listener
+        scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                toast("Loading more...")
+            }
+
+        }
+
+        setAdapter()
 
     }
 
@@ -68,10 +83,9 @@ class MyBookingsActivity : AppCompatActivity() {
         mAdapter = RecyclerViewAdapter(this@MyBookingsActivity, modelList)
 
         recyclerView!!.setHasFixedSize(true)
+        recyclerView!!.addOnScrollListener(scrollListener)
 
         // use a linear layout manager
-
-        val layoutManager = LinearLayoutManager(this)
 
         recyclerView!!.layoutManager = layoutManager
 

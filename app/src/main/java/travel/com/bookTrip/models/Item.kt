@@ -1,6 +1,6 @@
 package travel.com.bookTrip.models
 
-data class Item(val note: Null = null,
+data class Item(val note: String = "",
                 val tripId: String = "",
                 val childCount: String = "",
                 val roomCount: String = "",

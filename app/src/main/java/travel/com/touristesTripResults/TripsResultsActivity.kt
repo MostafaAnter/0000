@@ -26,8 +26,11 @@ import android.widget.PopupMenu
 import kotlinx.android.synthetic.main.activity_trips_results.*
 import travel.com.touristesPopUpFilter.PopUPFilter
 import travel.com.touristesTripDetail.TouristesTripDetailActivity
+import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.Constants
+import travel.com.utility.EndlessRecyclerViewScrollListener
 import travel.com.utility.Util
+import travel.com.utility.toast
 
 
 class TripsResultsActivity : AppCompatActivity() {
@@ -37,14 +40,17 @@ class TripsResultsActivity : AppCompatActivity() {
     private var swipeRefreshRecyclerList: SwipeRefreshLayout? = null
     private var mAdapter: RecyclerViewAdapter? = null
 
-    private val modelList = ArrayList<TripItemModel>()
+    private val modelList = ArrayList<DataItem>()
+    val layoutManager = LinearLayoutManager(this)
 
     // vars for search
-    var date: String = ""
-    var region: String = ""
-    var country_id: String = ""
-    var city_id: String = ""
+    var date: String? = null
+    var region: String? = null
+    var country_id: String? = null
+    var city_id: String? = null
 
+    // for load more data
+    private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +58,13 @@ class TripsResultsActivity : AppCompatActivity() {
 
         // ButterKnife.bind(this);
         findViews()
-        setAdapter()
         changeViewsFonts()
         setToolbar()
+
+        date = intent.extras.getString("date", null)
+        region = intent.extras.getString("region", null)
+        country_id = intent.extras.getString("country_id", null)
+        city_id = intent.extras.getString("city_id", null)
 
         swipeRefreshRecyclerList!!.setOnRefreshListener {
             // Do your stuff on refresh
@@ -69,6 +79,16 @@ class TripsResultsActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
         })
 
+        // set scroll listener
+        scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                toast("Loading more...")
+            }
+
+        }
+
+        setAdapter()
+
     }
 
     private fun findViews() {
@@ -78,26 +98,21 @@ class TripsResultsActivity : AppCompatActivity() {
 
 
     private fun setAdapter() {
-
-
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-        modelList.add(TripItemModel("منتجع شرم كليف", "4 ايام / 3 ليالي "))
-
-
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
+        modelList.add(DataItem())
 
         mAdapter = RecyclerViewAdapter(this@TripsResultsActivity, modelList)
 
@@ -106,16 +121,15 @@ class TripsResultsActivity : AppCompatActivity() {
 
         // use a linear layout manager
 
-        val layoutManager = LinearLayoutManager(this)
-
         recyclerView!!.layoutManager = layoutManager
 
 
         recyclerView!!.adapter = mAdapter
 
+        recyclerView!!.addOnScrollListener(scrollListener)
 
         mAdapter!!.SetOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int, model: TripItemModel) {
+            override fun onItemClick(view: View, position: Int, model: DataItem) {
                 startActivity(Intent(this@TripsResultsActivity, TouristesTripDetailActivity::class.java))
             }
         })

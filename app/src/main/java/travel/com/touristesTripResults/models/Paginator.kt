@@ -12,5 +12,5 @@ data class Paginator(val firstPageUrl: String = "",
                      val nextPageUrl: String = "",
                      val from: Int = 0,
                      val to: Int = 0,
-                     val prevPageUrl: Null = null,
+                     val prevPageUrl: String = "",
                      val currentPage: Int = 0)

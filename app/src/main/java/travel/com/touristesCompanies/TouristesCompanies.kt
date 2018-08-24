@@ -15,7 +15,9 @@ import kotlinx.android.synthetic.main.activity_touristes_companies.*
 import travel.com.R
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
 import travel.com.utility.Constants
+import travel.com.utility.EndlessRecyclerViewScrollListener
 import travel.com.utility.Util
+import travel.com.utility.toast
 import java.util.*
 
 
@@ -26,16 +28,18 @@ class TouristesCompanies : AppCompatActivity() {
     private var mAdapter: RecyclerViewAdapter? = null
 
     private val modelList = ArrayList<CompanyModel>()
+    val layoutManager = LinearLayoutManager(this)
+
+    // for load more data
+    private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_touristes_companies)
-
         findViews()
         changeViewsFonts()
         setToolbar()
-        setAdapter()
 
         swipeRefreshRecyclerList!!.setOnRefreshListener {
             // Do your stuff on refresh
@@ -44,6 +48,16 @@ class TouristesCompanies : AppCompatActivity() {
                     swipeRefreshRecyclerList!!.isRefreshing = false
             }, 5000)
         }
+
+        // set scroll listener
+        scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                toast("Loading more...")
+            }
+
+        }
+
+        setAdapter()
 
     }
 
@@ -80,14 +94,13 @@ class TouristesCompanies : AppCompatActivity() {
 
         // use a linear layout manager
 
-        val layoutManager = LinearLayoutManager(this)
-
         recyclerView!!.layoutManager = layoutManager
 
 
         val dividerItemDecoration = DividerItemDecoration(recyclerView!!.context, layoutManager.orientation)
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this@TouristesCompanies, R.drawable.divider_recyclerview)!!)
         recyclerView!!.addItemDecoration(dividerItemDecoration)
+        recyclerView!!.addOnScrollListener(scrollListener)
 
         recyclerView!!.adapter = mAdapter
 

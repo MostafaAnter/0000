@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_recycler_list.view.*
 import travel.com.R
+import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.CircleTransform
 import travel.com.utility.Constants
 import travel.com.utility.Util
@@ -16,11 +17,11 @@ import travel.com.utility.Util
 /**
  * A custom adapter to use with the RecyclerView widget.
  */
-class RecyclerViewAdapter(private val mContext: Context, private var modelList: ArrayList<TripItemModel>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerViewAdapter(private val mContext: Context, private var modelList: ArrayList<DataItem>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mItemClickListener: OnItemClickListener? = null
 
-    fun updateList(modelList: ArrayList<TripItemModel>) {
+    fun updateList(modelList: ArrayList<DataItem>) {
         this.modelList = modelList
         notifyDataSetChanged()
 
@@ -53,13 +54,13 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
         this.mItemClickListener = mItemClickListener
     }
 
-    private fun getItem(position: Int): TripItemModel {
+    private fun getItem(position: Int): DataItem {
         return modelList!![position]
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int, model: TripItemModel)
+        fun onItemClick(view: View, position: Int, model: DataItem)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -70,10 +71,10 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
 
         }
 
-        fun bindTrip(tripItemModel: TripItemModel?) {
+        fun bindTrip(tripItemModel: DataItem?) {
             with(tripItemModel) {
-                itemView.item_txt_title.text = this?.title
-                itemView.item_txt_message.text = this?.message
+//                itemView.item_txt_title.text = this?.title
+//                itemView.item_txt_message.text = this?.message
 
                 Glide.with(mContext)   // pass Context
                         .load(R.drawable.cdn) // add your image url

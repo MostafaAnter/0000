@@ -14,9 +14,14 @@ import android.view.MenuItem
 import android.view.SubMenu
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import java.io.*
 import java.util.ArrayList
 
+
+fun AppCompatActivity.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
+}
 
 class Util{
     companion object {

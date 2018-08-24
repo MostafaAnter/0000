@@ -79,7 +79,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
             }
             R.id.my_bookings -> {
-                startActivity(Intent(this@HomeActivity, SignInActivity::class.java))
+                startActivity(Intent(this@HomeActivity, MyBookingsActivity::class.java))
                 overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
             }
         }

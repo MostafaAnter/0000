@@ -38,10 +38,10 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
 
 
     // vars for search
-    var date: String = ""
-    var region: String = ""
-    var country_id: String = ""
-    var city_id: String = ""
+    var date: String? = null
+    var region: String? = null
+    var country_id: String? = null
+    var city_id: String? = null
 
 
 
@@ -237,7 +237,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
     private val getCitiesLoader = object : LoaderManager.LoaderCallbacks<List<CityItem>> {
         override fun onCreateLoader(
                 id: Int, args: Bundle?): Loader<List<CityItem>> {
-            return GetCitiesAsyncTaskLoader(this@TouristesTripesFilterActivity, country_id.toInt())
+            return GetCitiesAsyncTaskLoader(this@TouristesTripesFilterActivity, country_id?.toInt()!!)
         }
 
         override fun onLoadFinished(
