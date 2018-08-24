@@ -85,9 +85,9 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                                     city_id = citiesObjects[which].id.toString()
                                 }
                             })
-                    builder.setPositiveButton("Okey", { dialog, which ->
+                    builder.setPositiveButton("Okey") { dialog, which ->
                         dialog.dismiss()
-                    })
+                    }
                     builder.create().show()
                 }
             }
@@ -104,9 +104,9 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                             text00.text = countries[which]
                             supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getCitiesLoader)
                         })
-                builder.setPositiveButton("Okey", { dialog, which ->
+                builder.setPositiveButton("Okey") { dialog, which ->
                     dialog.dismiss()
-                })
+                }
                 builder.create().show()
             }
 

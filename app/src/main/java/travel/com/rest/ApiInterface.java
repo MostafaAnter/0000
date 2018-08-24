@@ -58,7 +58,7 @@ public interface ApiInterface {
     Observable<TripSubCategoryResponse> getTripsSubCategories(@Header("Accept") String accept, @Header("Authorization") String authorization,
                                                               @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                                               @Header("User-Agent") String userAgent,
-                                                              @Path("category_id") int category_id);
+                                                              @Path("category_id") String category_id);
 
 
     @GET
