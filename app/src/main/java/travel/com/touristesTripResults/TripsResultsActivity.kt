@@ -24,7 +24,11 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.DividerItemDecoration
 import android.widget.PopupMenu
 import kotlinx.android.synthetic.main.activity_trips_results.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import travel.com.touristesPopUpFilter.PopUPFilter
+import travel.com.touristesPopUpFilter.SearchQueryObject
 import travel.com.touristesTripDetail.TouristesTripDetailActivity
 import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.Constants
@@ -48,6 +52,10 @@ class TripsResultsActivity : AppCompatActivity() {
     var region: String? = null
     var country_id: String? = null
     var city_id: String? = null
+    var category_id: String? = null
+    var subCategory_id: String? = null
+    var priceFrom: String? = null
+    var priceTo: String? = null
 
     // for load more data
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
@@ -146,6 +154,24 @@ class TripsResultsActivity : AppCompatActivity() {
                 R.drawable.ic_arrow_back_wight_24dp, {
             finish()
         }, true)
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: SearchQueryObject) {
+        category_id = event.category_id
+        subCategory_id = event.subCategory_id
+        priceFrom = event.priceFrom
+        priceTo = event.priceTo
     }
 
 

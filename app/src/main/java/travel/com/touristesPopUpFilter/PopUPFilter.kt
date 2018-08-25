@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_popup_filter.*
+import org.greenrobot.eventbus.EventBus
 import travel.com.R
 import travel.com.loaders.GetCategoriesAsyncTaskLoader
 import travel.com.loaders.GetSubCategoriesAsyncTaskLoader
@@ -101,6 +102,8 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
 
     override fun finish() {
         super.finish()
+        EventBus.getDefault().post(SearchQueryObject(category_id,
+                subCategory_id, priceFrom, priceTo))
         overridePendingTransition(R.anim.push_up_exit, R.anim.push_up_enter)
     }
 
