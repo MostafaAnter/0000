@@ -35,7 +35,7 @@ class GetCitiesAsyncTaskLoader(context: Context, private val country_id: Int) : 
 
     init {
         // get apiService
-        apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
         store = TravellawyPrefStore(context)
     }
 

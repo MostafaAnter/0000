@@ -69,7 +69,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         sdh = SweetDialogHelper(this)
 
         // init api service
-        apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
 
         // init user photo
         Glide.with(this@SignUpActivity)   // pass Context

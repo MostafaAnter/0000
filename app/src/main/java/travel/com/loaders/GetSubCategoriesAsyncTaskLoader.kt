@@ -45,7 +45,7 @@ class GetSubCategoriesAsyncTaskLoader(context: Context, private val category_id:
 
     init {
         // get apiService
-        apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
         store = TravellawyPrefStore(context)
     }
 

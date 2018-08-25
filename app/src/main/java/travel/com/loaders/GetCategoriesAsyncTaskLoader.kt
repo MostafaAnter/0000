@@ -44,7 +44,7 @@ class GetCategoriesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<Cate
 
     init {
         // get apiService
-        apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
         store = TravellawyPrefStore(context)
     }
 

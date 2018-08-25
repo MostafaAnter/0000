@@ -57,7 +57,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         sdh = SweetDialogHelper(this)
 
         // init api service
-        apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
 
         sign_up_button.setOnClickListener(this)
         email_sign_in_button.setOnClickListener(this)

@@ -42,7 +42,7 @@ class GetCountriesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<Count
 
     init {
         // get apiService
-        apiService = ApiClient.getClient().create(ApiInterface::class.java)
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
         store = TravellawyPrefStore(context)
     }
 

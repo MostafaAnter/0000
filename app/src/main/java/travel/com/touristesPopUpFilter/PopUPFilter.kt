@@ -73,6 +73,8 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_popup_filter)
         changeViewsFonts()
+        categoryPicker.setOnClickListener(this)
+        subCategoryPicker.setOnClickListener(this)
         button1.setOnClickListener(this)
     }
 
