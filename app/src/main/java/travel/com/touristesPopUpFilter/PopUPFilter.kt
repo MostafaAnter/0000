@@ -27,6 +27,24 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
 
     var category_id: String? = null
     var subCategory_id: String? = null
+    var priceFrom: String? = null
+    var priceTo: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_popup_filter)
+        changeViewsFonts()
+        categoryPicker.setOnClickListener(this)
+        subCategoryPicker.setOnClickListener(this)
+        button1.setOnClickListener(this)
+
+        rangeSeekbar.setOnRangeSeekbarChangeListener { minValue, maxValue ->
+            priceFrom = minValue.toString()
+            priceTo = maxValue.toString()
+            minPrice.text = minValue.toString()
+            maxPrice.text = maxValue.toString()
+        }
+    }
 
     override fun onClick(p0: View?) {
         when(p0){
@@ -69,15 +87,6 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_popup_filter)
-        changeViewsFonts()
-        categoryPicker.setOnClickListener(this)
-        subCategoryPicker.setOnClickListener(this)
-        button1.setOnClickListener(this)
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         supportLoaderManager.initLoader(0, null, getCategoriesLoader)
@@ -96,12 +105,9 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
     }
 
     fun changeViewsFonts(){
-        Util.changeViewTypeFace(this@PopUPFilter, Constants.FONT_BOLD, text0, text1, text2,
-                text3, button1)
+        Util.changeViewTypeFace(this@PopUPFilter, Constants.FONT_BOLD, text0, text3, button1)
         Util.changeViewTypeFace(this@PopUPFilter, Constants.FONT_REGULAR,
-                textCategory, textSubCategory, text4, text5,
-                checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7,
-                checkbox8, checkbox9, checkbox10, checkbox11, checkbox12)
+                textCategory, textSubCategory, text4, text5)
     }
 
     // get countries
