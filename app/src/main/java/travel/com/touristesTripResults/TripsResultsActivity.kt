@@ -82,7 +82,7 @@ class TripsResultsActivity : AppCompatActivity() {
         // set scroll listener
         scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                toast("Loading more...")
+                toast("جارى تحميل المزيد...")
             }
 
         }
@@ -158,6 +158,8 @@ class TripsResultsActivity : AppCompatActivity() {
         subCategory_id = event.subCategory_id
         priceFrom = event.priceFrom
         priceTo = event.priceTo
+
+
     }
 
     // get countries

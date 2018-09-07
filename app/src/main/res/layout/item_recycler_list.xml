@@ -70,7 +70,7 @@
                 android:id="@+id/ratingValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.0"
+                android:text=""
                 android:padding="5dp"
                 android:textColor="@android:color/white"
                 android:background="@drawable/gradiant_background"/>

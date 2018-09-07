@@ -1,5 +1,6 @@
 package travel.com.utility
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.net.ConnectivityManager
@@ -7,16 +8,16 @@ import android.os.AsyncTask
 import android.support.design.widget.NavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.widget.TextView
 import android.text.Spannable
 import android.text.SpannableString
 import android.view.MenuItem
-import android.view.SubMenu
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import java.io.*
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 fun AppCompatActivity.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
@@ -97,6 +98,51 @@ class Util{
             val mNewTitle = SpannableString(mi.getTitle())
             mNewTitle.setSpan(CustomTypefaceSpan("", font), 0, mNewTitle.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
             mi.setTitle(mNewTitle)
+        }
+
+        //1 minute = 60 seconds
+        //1 hour = 60 x 60 = 3600
+        //1 day = 3600 x 24 = 86400
+        fun printDifference(startDate: Date, endDate: Date) : Long{
+            //milliseconds
+            var different = endDate.time - startDate.time
+
+            println("startDate : $startDate")
+            println("endDate : $endDate")
+            println("different : $different")
+
+            val secondsInMilli: Long = 1000
+            val minutesInMilli = secondsInMilli * 60
+            val hoursInMilli = minutesInMilli * 60
+            val daysInMilli = hoursInMilli * 24
+
+            val elapsedDays = different / daysInMilli
+            different %= daysInMilli
+
+            val elapsedHours = different / hoursInMilli
+            different %= hoursInMilli
+
+            val elapsedMinutes = different / minutesInMilli
+            different %= minutesInMilli
+
+            val elapsedSeconds = different / secondsInMilli
+
+            System.out.printf(
+                    "%d days, %d hours, %d minutes, %d seconds%n",
+                    elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds)
+
+            // return day numbers
+            return elapsedDays
+        }
+
+        @SuppressLint("SimpleDateFormat")
+        fun conVertDateTextToObject(textDate: String) : Date{
+            return try {
+                val simpleDateFormat = SimpleDateFormat("dd/M/yyyy")
+                simpleDateFormat.parse(textDate)
+            } catch (e: Exception) {
+                Date()
+            }
         }
 
     }

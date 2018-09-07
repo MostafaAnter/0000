@@ -76,9 +76,13 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
                 itemView.item_txt_title.text = this?.title
 
                 // todo difference between start date and end date
-                itemView.days_numbers.text = "4 أيام / 3 ليالي"
+                val dayNum = Util.printDifference(Util.conVertDateTextToObject(this?.start_date?: ""),
+                        Util.conVertDateTextToObject(this?.end_date?: ""))
+                itemView.days_numbers.text = "$dayNum" + " أيام" + " / " + "${dayNum - 1}" + " ليالى"
 
                 itemView.ratingBar.rating = this?.stars!!.toFloat()
+                itemView.ratingValue.text = this.stars.toFloat().toString()
+                itemView.button1.text = this.price + " ج م سعر الفرد"
 
                 Glide.with(mContext)   // pass Context
                         .load(image) // add your image url
