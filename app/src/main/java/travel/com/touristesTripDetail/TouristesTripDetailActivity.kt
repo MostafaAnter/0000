@@ -1,6 +1,7 @@
 package travel.com.touristesTripDetail
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -77,13 +78,6 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setServicesAdapter() {
-
-
-        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
-        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
-        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
-        servicesList.add(ServisesModel("الطعام والشراب", " فطار + العشاء شامل الضريبه"))
-
         servicesAdapter = ServicesAvilableAdapter(this@TouristesTripDetailActivity, servicesList)
 
         recyclerView1.setHasFixedSize(true)
@@ -112,17 +106,6 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setCommentsAdapter() {
-
-
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-        commentsList.add(CommentsModel("مصطفى عنتر", " المكان جميل والعاملين زى الفل"))
-
         commentsAdapter = CommentsAdapter(this@TouristesTripDetailActivity, commentsList)
 
         recyclerView2.setHasFixedSize(true)
@@ -145,8 +128,6 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
         commentsAdapter!!.SetOnItemClickListener(object : CommentsAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int, model: CommentsModel) {
 
-                //handle item click events here
-                Toast.makeText(this@TouristesTripDetailActivity, "Hey " + model.title, Toast.LENGTH_SHORT).show()
 
 
             }
@@ -377,6 +358,55 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
 
                 }
             }
+
+            text9.text = hotel_dec
+            text12.text = important_info
+            button2.setOnClickListener{
+                button2.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                button3.setBackgroundColor(resources.getColor(R.color.gray_88333333))
+                button4.setBackgroundColor(resources.getColor(R.color.gray_88333333))
+                text9.text = hotel_dec
+            }
+            button3.setOnClickListener{
+                button3.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                button2.setBackgroundColor(resources.getColor(R.color.gray_88333333))
+                button4.setBackgroundColor(resources.getColor(R.color.gray_88333333))
+                var s = StringBuilder()
+                trip_days?.forEach {
+                    s.append(" " + it.desc)
+                }
+                text9.text = s
+            }
+            button4.setOnClickListener{
+                button4.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                button3.setBackgroundColor(resources.getColor(R.color.gray_88333333))
+                button2.setBackgroundColor(resources.getColor(R.color.gray_88333333))
+                text9.text = cancellation_policy
+            }
+
+            var food = StringBuilder()
+            food_types?.forEach {
+                food.append(it.text + ". ")
+            }
+            servicesList.add(ServisesModel("الطعام والشراب", food.toString()))
+            servicesAdapter?.notifyDataSetChanged()
+
+            var funService = StringBuilder()
+            entertainment_service_types?.forEach {
+                funService.append(it.text + ". ")
+            }
+
+            servicesList.add(ServisesModel("المرافق المتوفرة", funService.toString()))
+            servicesAdapter?.notifyDataSetChanged()
+
+            trip_comments?.forEach {
+                commentsList.add(CommentsModel(it.client.name?: "",
+                        it.comment?: "", it.client.image?: "", it.createdAt?: "2018-06-19 08:36:55"))
+            }
+            commentsAdapter?.notifyDataSetChanged()
+
+
+
         }
 
     }
