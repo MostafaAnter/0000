@@ -1,32 +1,20 @@
 package travel.com.touristesTripResults
 
+
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-
+import android.os.Handler
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-
 import android.support.v7.widget.RecyclerView
 import android.view.View
-
-import java.util.ArrayList
-
-import android.support.v4.widget.SwipeRefreshLayout
-
-import travel.com.R
-
-import android.widget.Toast
-import android.os.Handler
-import android.support.v7.widget.Toolbar
-
-
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.widget.DividerItemDecoration
-import android.widget.PopupMenu
 import kotlinx.android.synthetic.main.activity_trips_results.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import travel.com.R
 import travel.com.touristesPopUpFilter.PopUPFilter
 import travel.com.touristesPopUpFilter.SearchQueryObject
 import travel.com.touristesTripDetail.TouristesTripDetailActivity
@@ -35,6 +23,7 @@ import travel.com.utility.Constants
 import travel.com.utility.EndlessRecyclerViewScrollListener
 import travel.com.utility.Util
 import travel.com.utility.toast
+import java.util.*
 
 
 class TripsResultsActivity : AppCompatActivity() {

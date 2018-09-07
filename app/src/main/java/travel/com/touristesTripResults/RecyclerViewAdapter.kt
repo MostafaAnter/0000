@@ -73,16 +73,20 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
 
         fun bindTrip(tripItemModel: DataItem?) {
             with(tripItemModel) {
-//                itemView.item_txt_title.text = this?.title
-//                itemView.item_txt_message.text = this?.message
+                itemView.item_txt_title.text = this?.title
+
+                // todo difference between start date and end date
+                itemView.days_numbers.text = "4 أيام / 3 ليالي"
+
+                itemView.ratingBar.rating = this?.stars!!.toFloat()
 
                 Glide.with(mContext)   // pass Context
-                        .load(R.drawable.cdn) // add your image url
+                        .load(image) // add your image url
                         .transform(CircleTransform(mContext)) // applying the image transformer
                         .into(itemView.img_user)
 
                 // change font
-                Util.changeViewTypeFace(mContext, Constants.FONT_REGULAR, itemView.item_txt_message,
+                Util.changeViewTypeFace(mContext, Constants.FONT_REGULAR, itemView.days_numbers,
                         itemView.button1)
                 Util.changeViewTypeFace(mContext, Constants.FONT_BOLD,
                         itemView.item_txt_title)
