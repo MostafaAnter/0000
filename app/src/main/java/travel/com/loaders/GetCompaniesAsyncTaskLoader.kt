@@ -3,6 +3,7 @@ package travel.com.loaders
 
 import android.content.Context
 import android.support.v4.content.AsyncTaskLoader
+import android.util.Log
 import rx.Subscriber
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -66,16 +67,19 @@ class GetCompaniesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<DataI
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<CompaniesResponse>() {
                     override fun onCompleted() {
-
+                        Log.e("", "")
                     }
 
                     override fun onError(e: Throwable) {
-
+                        Log.e("", e.message)
                     }
 
                     override fun onNext(getCountriesResult: CompaniesResponse) {
                         mData = getCountriesResult.paginator?.data
-                        TouristesCompanies.nextUrl = getCountriesResult?.paginator?.next_page_url!!
+
+                        if (getCountriesResult.paginator.next_page_url != null) {
+                            TouristesCompanies.nextUrl = getCountriesResult.paginator.next_page_url
+                        }
                         deliverResult(mData)
                         deleteFileContent(downloadedFile)
                         saveObjectsInsideFile(downloadedFile, mData!!)

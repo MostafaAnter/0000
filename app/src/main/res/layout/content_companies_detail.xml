@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:background="@color/gray"
-                    android:src="@drawable/cdn" />
+                    android:src="@color/gray_A7A7A7" />
             </FrameLayout>
 
             <LinearLayout
@@ -77,7 +77,7 @@
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="شركة مساهمه مصريه تم انشاؤها ف عهد محمد انور السادات حيث قام سيادته بفتح الفندق وترويقه فى تمام السادسه"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
 
 

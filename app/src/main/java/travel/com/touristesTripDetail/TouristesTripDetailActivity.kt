@@ -420,7 +420,7 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
 
             trip_comments?.forEach {
                 commentsList.add(CommentsModel(it.client.name?: "",
-                        it.comment?: "", it.client.image?: "", it.createdAt?: "2018-06-19 08:36:55"))
+                        it.comment?: "", it.client.image?: "", it.created_at?: "2018-06-19 08:36:55"))
             }
             commentsAdapter?.notifyDataSetChanged()
 

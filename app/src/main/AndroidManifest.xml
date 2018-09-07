@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- make phone call -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:name=".app.TravelawyApp"
         android:allowBackup="true"

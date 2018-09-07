@@ -74,12 +74,12 @@ class CommentsAdapter(private val mContext: Context, private var modelList: Arra
         fun bindTrip(commentsModel: CommentsModel?) {
             commentsModel?.let {
                 with(it){
-                    itemView.item_txt_title.text = title
-                    itemView.item_txt_comment.text = message
-                    itemView.item_txt_date.text = "5/3/2018"
+                    itemView.item_txt_title.text = name
+                    itemView.item_txt_comment.text = comment
+                    itemView.item_txt_date.text = dateAfterTransformation
 
                     Glide.with(mContext)   // pass Context
-                            .load(R.drawable.cdn)
+                            .load(image)
                             .transform(CircleTransform(mContext))// add your image url
                             .into(itemView.img_user)
 
