@@ -1,7 +1,7 @@
 package travel.com.touristesTripDetail
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -12,15 +12,26 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_touristes_trip_detail.*
 import kotlinx.android.synthetic.main.content_touristes_trip_detail.*
+import rx.Subscriber
+import rx.Subscription
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import travel.com.BuildConfig
 import travel.com.R
 import travel.com.bookTrip.BookTripActivity
+import travel.com.rest.ApiClient
+import travel.com.rest.ApiInterface
+import travel.com.store.TravellawyPrefStore
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
+import travel.com.touristesTripDetail.models.TripCommentResponse
 import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.Constants
+import travel.com.utility.SweetDialogHelper
 import travel.com.utility.Util
 import java.util.*
 
-class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
+class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button1 -> {
@@ -40,9 +51,13 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var commentsAdapter: CommentsAdapter? = null
     private val commentsList = ArrayList<CommentsModel>()
 
+    private var apiService: ApiInterface? = null
+    private var subscription1: Subscription? = null
+
 
     private lateinit var tripItem: DataItem
 
+    private lateinit var sweetDialogHelper: SweetDialogHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +75,9 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         tripItem = intent.getParcelableExtra("item")
 
+        sweetDialogHelper = SweetDialogHelper(this)
+        // init api service
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
         bindData()
 
     }
@@ -406,9 +424,52 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
             commentsAdapter?.notifyDataSetChanged()
 
 
+            button5.setOnClickListener {
+                sweetDialogHelper.showCustomWithDialog("أضف تعليق", "تم") {
+                    addComment(sweetDialogHelper, this@TouristesTripDetailActivity,
+                            id.toString(), it)
+                }
+            }
 
         }
 
     }
+
+    private fun addComment(sdh: SweetDialogHelper, mContext: Context, tripID: String, comment: String) {
+        sdh.showMaterialProgress(getString(R.string.loading))
+        val loginNormal = apiService?.commentOnTrip(BuildConfig.Header_Accept,
+                TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                BuildConfig.From,
+                BuildConfig.Accept_Language, BuildConfig.User_Agent, tripID, comment)
+        subscription1 = loginNormal
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Subscriber<TripCommentResponse>() {
+                    override fun onCompleted() {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        sdh.dismissDialog()
+                        sdh.showErrorMessage("Error!", e.message)
+                    }
+
+                    override fun onNext(signUpResult: TripCommentResponse?) {
+                        if (signUpResult?.code != 100 || signUpResult?.item == null){
+                            sdh.dismissDialog()
+                            sdh.showErrorMessage("فشل!", signUpResult?.message)
+                            return
+                        }
+
+                        sdh.dismissDialog()
+                        sdh.showSuccessfulMessage("Done!", "تم التعليق بنجاح") {
+                            finish()
+                        }
+
+                    }
+                })
+
+    }
+
 
 }

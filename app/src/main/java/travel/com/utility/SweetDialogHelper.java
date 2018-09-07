@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
+import android.widget.EditText;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import travel.com.R;
@@ -19,6 +20,11 @@ public class SweetDialogHelper {
     public interface DoAction{
         void doSomeThing();
     }
+
+    public interface DoActionWithString{
+        void doSomeThing(String text);
+    }
+
     public SweetDialogHelper(FragmentActivity mContext) {
         this.mContext = mContext;
     }
@@ -90,6 +96,23 @@ public class SweetDialogHelper {
         pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE);
         pDialog.setTitleText(title)
                 .setContentText(message)
+                .show();
+    }
+
+    public void showCustomWithDialog(String title, String confirmationButtonText, final DoActionWithString action){
+        final EditText editText = new EditText(mContext);
+        pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.NORMAL_TYPE);
+
+        pDialog.setTitleText(title)
+                .setConfirmText(confirmationButtonText)
+                .setCustomView(editText)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        action.doSomeThing(editText.getText().toString());
+                        sDialog.dismissWithAnimation();
+                    }
+                })
                 .show();
     }
 
