@@ -145,6 +145,12 @@ class Util{
             }
         }
 
+        fun getDate(): String {
+            val dateFormat = SimpleDateFormat("yyyy/MM/dd")
+            val date = Date()
+            return dateFormat.format(date)
+        }
+
     }
 
     class ReadObjectsFromFile<T>(private val code: (mList: List<T>?) -> Unit, private val file: File) : AsyncTask<Void, Void, List<T>?>() {

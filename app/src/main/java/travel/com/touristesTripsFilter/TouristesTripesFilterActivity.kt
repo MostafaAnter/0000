@@ -127,6 +127,8 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
 
         if (savedInstanceState == null)
         onRadioButtonClicked(radio1)
+
+        text4.text = Util.getDate()
     }
 
     public override fun onStart() {
