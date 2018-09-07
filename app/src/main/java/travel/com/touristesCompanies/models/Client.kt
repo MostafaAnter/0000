@@ -1,5 +1,9 @@
 package travel.com.touristesCompanies.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Client(val authorization: String = "",
                   val image: String = "",
                   val isActive: String = "",
@@ -11,4 +15,4 @@ data class Client(val authorization: String = "",
                   val createdAt: String = "",
                   val deviceType: String = "",
                   val id: Int = 0,
-                  val email: String = "")
+                  val email: String = ""): Parcelable

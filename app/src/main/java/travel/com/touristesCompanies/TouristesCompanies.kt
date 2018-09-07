@@ -3,7 +3,10 @@ package travel.com.touristesCompanies
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Parcelable
+import android.support.v4.app.LoaderManager
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.Loader
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -13,11 +16,10 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_touristes_companies.*
 import travel.com.R
+import travel.com.loaders.GetCompaniesAsyncTaskLoader
+import travel.com.touristesCompanies.models.DataItem
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
-import travel.com.utility.Constants
-import travel.com.utility.EndlessRecyclerViewScrollListener
-import travel.com.utility.Util
-import travel.com.utility.toast
+import travel.com.utility.*
 import java.util.*
 
 
@@ -27,12 +29,15 @@ class TouristesCompanies : AppCompatActivity() {
     private var swipeRefreshRecyclerList: SwipeRefreshLayout? = null
     private var mAdapter: RecyclerViewAdapter? = null
 
-    private val modelList = ArrayList<CompanyModel>()
+    private val modelList = ArrayList<DataItem>()
     val layoutManager = LinearLayoutManager(this)
 
     // for load more data
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
+    companion object {
+        var nextUrl: String = ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,22 +47,31 @@ class TouristesCompanies : AppCompatActivity() {
         setToolbar()
 
         swipeRefreshRecyclerList!!.setOnRefreshListener {
-            // Do your stuff on refresh
-            Handler().postDelayed({
-                if (swipeRefreshRecyclerList!!.isRefreshing)
-                    swipeRefreshRecyclerList!!.isRefreshing = false
-            }, 5000)
+            getData()
         }
 
         // set scroll listener
         scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                toast("Loading more...")
+                toast("جارى تحميل المزيد...")
             }
 
         }
 
         setAdapter()
+
+        if (Util.isOnline(this)){
+            getData()
+        }else{
+            SweetDialogHelper(this).showErrorMessage("فشل", "لايوجد انترنت!")
+        }
+
+    }
+
+    private fun getData(){
+        if (!swipeRefreshRecyclerList!!.isRefreshing)
+            swipeRefreshRecyclerList!!.isRefreshing = true
+        supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getCompanies)
 
     }
 
@@ -67,27 +81,6 @@ class TouristesCompanies : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-
-
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-        modelList.add(CompanyModel("شركة أيجبت فور ترافلز", "عدد الرحلات 500"))
-
-
-
         mAdapter = RecyclerViewAdapter(this@TouristesCompanies, modelList)
 
         recyclerView!!.setHasFixedSize(true)
@@ -106,11 +99,11 @@ class TouristesCompanies : AppCompatActivity() {
 
 
         mAdapter!!.SetOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int, model: CompanyModel) {
+            override fun onItemClick(view: View, position: Int, model: DataItem) {
 
-                //handle item click events here
-                startActivity(Intent(this@TouristesCompanies, CompaniesDetailActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                val intent = Intent(this@TouristesCompanies, CompaniesDetailActivity::class.java)
+                intent.putExtra("item", modelList[position] as Parcelable)
+                startActivity(intent)
 
 
             }
@@ -128,6 +121,49 @@ class TouristesCompanies : AppCompatActivity() {
                 R.drawable.ic_arrow_back_wight_24dp, {
             finish()
         }, true)
+    }
+
+    // get countries
+    private val getCompanies = object : LoaderManager.LoaderCallbacks<List<DataItem>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<DataItem>> {
+            return GetCompaniesAsyncTaskLoader(this@TouristesCompanies)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<DataItem>>, data: List<DataItem>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null && data.isNotEmpty()) {
+                with(modelList){
+                    clear()
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                mAdapter?.notifyDataSetChanged()
+                isEmptyData()
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<DataItem>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+
+    fun isEmptyData(){
+        if (modelList.size != 0){
+            noData.visibility = View.GONE
+        }else{
+            noData.visibility = View.VISIBLE
+        }
+
+        if (swipeRefreshRecyclerList!!.isRefreshing)
+            swipeRefreshRecyclerList!!.isRefreshing = false
     }
 
 

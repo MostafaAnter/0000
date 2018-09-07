@@ -192,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/gradiant_background"
-                android:text="أحجز الأن"
+                android:text="عرض رحلات الشركة"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
