@@ -21,6 +21,7 @@ import travel.com.R
 import travel.com.bookTrip.BookTripActivity
 import travel.com.rest.ApiClient
 import travel.com.rest.ApiInterface
+import travel.com.signIn.SignInActivity
 import travel.com.store.TravellawyPrefStore
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
 import travel.com.touristesTripDetail.models.TripCommentResponse
@@ -426,8 +427,16 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
 
             button5.setOnClickListener {
                 sweetDialogHelper.showCustomWithDialog("أضف تعليق", "تم") {
-                    addComment(sweetDialogHelper, this@TouristesTripDetailActivity,
-                            id.toString(), it)
+                    if (TravellawyPrefStore(this@TouristesTripDetailActivity).getPreferenceValue(Constants.AUTHORIZATION, "empty")
+                            !!.contentEquals("empty")) {
+                        startActivity(Intent(this@TouristesTripDetailActivity, SignInActivity::class.java))
+                        overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
+                    }else{
+                        addComment(sweetDialogHelper, this@TouristesTripDetailActivity,
+                                id.toString(), it)
+                        commentsList.add(CommentsModel( "loading...", it,  "https://api.adorable.io/avatars/100/abott@adorable.png", "2018-06-19 08:36:55"))
+                        commentsAdapter?.notifyDataSetChanged()
+                    }
                 }
             }
 
