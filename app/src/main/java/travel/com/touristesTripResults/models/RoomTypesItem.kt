@@ -1,6 +1,8 @@
 package travel.com.touristesTripResults.models
 
-import travel.com.touristesTripResults.models.Pivot
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class RoomTypesItem(val pivot: Pivot,
-                         val text: String = "")
+                         val text: String = ""): Parcelable

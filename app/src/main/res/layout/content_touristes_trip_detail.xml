@@ -43,14 +43,16 @@
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  احدي رحلات شركة"
+                        android:text="  احدي رحلات "
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ايجبت ترافل"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text=""
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
@@ -70,7 +72,8 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_horizontal_margin">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -79,7 +82,7 @@
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="منتجع شرم كليف"
+                        android:text=""
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
@@ -90,28 +93,26 @@
                         android:textColor="@color/colorAccent" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:gravity="bottom|end">
+
                     <RatingBar
                         android:id="@+id/ratingBar"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
-                        android:rating="3.5"
-                        android:numStars="5"
-                        style="@style/Widget.AppCompat.RatingBar.Small"/>
+                        android:numStars="5" />
 
                     <TextView
-                        android:id="@+id/ratingValue"
+                        android:id="@+id/ratingValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="8.5"
                         android:padding="5dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/white"
                         android:background="@drawable/gradiant_background"/>
 
                 </LinearLayout>

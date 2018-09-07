@@ -1,11 +1,13 @@
 package travel.com.touristesTripResults.models
 
-import travel.com.touristesTripResults.models.Client
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-data class TripCommentsItem(val tripId: String = "",
-                            val updatedAt: String = "",
-                            val createdAt: String = "",
+@Parcelize
+data class TripCommentsItem(val tripId: String? = "",
+                            val updatedAt: String? = "",
+                            val createdAt: String? = "",
                             val client: Client,
-                            val comment: String = "",
+                            val comment: String? = "",
                             val id: Int = 0,
-                            val clientId: String = "")
+                            val clientId: String? = ""): Parcelable

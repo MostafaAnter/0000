@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.content_touristes_trip_detail.*
 import travel.com.R
 import travel.com.bookTrip.BookTripActivity
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
+import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.Constants
 import travel.com.utility.Util
 import java.util.*
@@ -38,6 +39,9 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
     private val commentsList = ArrayList<CommentsModel>()
 
 
+    private lateinit var tripItem: DataItem
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_touristes_trip_detail)
@@ -50,11 +54,17 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         button1.setOnClickListener(this)
         button6.setOnClickListener(this)
+
+
+        tripItem = intent.getParcelableExtra("item")
+
+        bindData()
+
     }
 
     fun changeViewsFonts() {
         Util.changeViewTypeFace(this@TouristesTripDetailActivity, Constants.FONT_REGULAR, toolbarTitle,
-                text1, text2, text3, text4, ratingValue, text6, text7, text8, text9,
+                text1, text2, text3, text4, ratingValueText, text6, text7, text8, text9,
                 text10, text11, text12, text13, button1, button2, button3, button4, button5, button6)
     }
 
@@ -141,6 +151,22 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
 
+
+    }
+
+    private fun bindData(){
+        with(tripItem){
+            text2.text = member?.name
+            text3.text = title
+
+            val dayNum = Util.printDifference(Util.conVertDateTextToObject(start_date?: ""),
+                    Util.conVertDateTextToObject(end_date?: ""))
+
+            text4.text = "$dayNum" + " أيام" + " / " + "${dayNum - 1}" + " ليالى"
+            ratingBar.rating = stars!!.toFloat()
+
+            ratingValueText.text =  stars.toFloat().toString()
+        }
 
     }
 

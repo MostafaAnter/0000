@@ -32,6 +32,11 @@ android {
         it.buildConfigField 'String', 'Accept_Language', '"ar"'
         it.buildConfigField 'String', 'User_Agent', '"android"'
     }
+
+    // for parcelable objects
+    androidExtensions {
+        experimental = true
+    }
 }
 
 repositories {

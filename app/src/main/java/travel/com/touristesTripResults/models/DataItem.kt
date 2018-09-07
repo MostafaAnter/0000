@@ -1,5 +1,10 @@
 package travel.com.touristesTripResults.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
 data class DataItem(val date: String? = "",
                     val end_date: String? = "",
                     val trip_days_count: String? = "",
@@ -43,4 +48,4 @@ data class DataItem(val date: String? = "",
                     val media_types: List<MediaTypesItem>? = null,
                     val category: Category? = null,
                     val country_id: String? = "",
-                    val city_id: String? = "")
+                    val city_id: String? = ""): Parcelable

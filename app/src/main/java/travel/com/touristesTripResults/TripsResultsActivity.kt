@@ -4,6 +4,7 @@ package travel.com.touristesTripResults
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Parcelable
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
 import android.support.v4.widget.SwipeRefreshLayout
@@ -22,10 +23,7 @@ import travel.com.touristesPopUpFilter.PopUPFilter
 import travel.com.touristesPopUpFilter.SearchQueryObject
 import travel.com.touristesTripDetail.TouristesTripDetailActivity
 import travel.com.touristesTripResults.models.DataItem
-import travel.com.utility.Constants
-import travel.com.utility.EndlessRecyclerViewScrollListener
-import travel.com.utility.Util
-import travel.com.utility.toast
+import travel.com.utility.*
 import java.util.*
 
 
@@ -89,7 +87,11 @@ class TripsResultsActivity : AppCompatActivity() {
 
         setAdapter()
 
-        getDate()
+        if (Util.isOnline(this)){
+            getDate()
+        }else{
+            SweetDialogHelper(this).showErrorMessage("فشل", "لايوجد انترنت!")
+        }
 
 
     }
@@ -124,7 +126,9 @@ class TripsResultsActivity : AppCompatActivity() {
 
         mAdapter!!.SetOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int, model: DataItem) {
-                startActivity(Intent(this@TripsResultsActivity, TouristesTripDetailActivity::class.java))
+                val intent = Intent(this@TripsResultsActivity, TouristesTripDetailActivity::class.java)
+                intent.putExtra("item", modelList[position] as Parcelable)
+                startActivity(intent)
             }
         })
 
