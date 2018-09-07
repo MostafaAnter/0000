@@ -4,6 +4,8 @@ package travel.com.touristesTripResults
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.LoaderManager
+import android.support.v4.content.Loader
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -15,6 +17,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import travel.com.R
+import travel.com.loaders.GetSearchResultsAsyncTaskLoader
 import travel.com.touristesPopUpFilter.PopUPFilter
 import travel.com.touristesPopUpFilter.SearchQueryObject
 import travel.com.touristesTripDetail.TouristesTripDetailActivity
@@ -49,6 +52,10 @@ class TripsResultsActivity : AppCompatActivity() {
     // for load more data
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
+    companion object {
+        var nextUrl: String = ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trips_results)
@@ -64,11 +71,7 @@ class TripsResultsActivity : AppCompatActivity() {
         city_id = intent.extras.getString("city_id", null)
 
         swipeRefreshRecyclerList!!.setOnRefreshListener {
-            // Do your stuff on refresh
-            Handler().postDelayed({
-                if (swipeRefreshRecyclerList!!.isRefreshing)
-                    swipeRefreshRecyclerList!!.isRefreshing = false
-            }, 5000)
+            getDate()
         }
 
         fab.setOnClickListener(View.OnClickListener {
@@ -86,6 +89,16 @@ class TripsResultsActivity : AppCompatActivity() {
 
         setAdapter()
 
+        getDate()
+
+
+    }
+
+    private fun getDate(){
+        if (!swipeRefreshRecyclerList!!.isRefreshing)
+            swipeRefreshRecyclerList!!.isRefreshing = true
+        supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getAllTrip)
+
     }
 
     private fun findViews() {
@@ -95,22 +108,6 @@ class TripsResultsActivity : AppCompatActivity() {
 
 
     private fun setAdapter() {
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-        modelList.add(DataItem())
-
         mAdapter = RecyclerViewAdapter(this@TripsResultsActivity, modelList)
 
         recyclerView!!.setHasFixedSize(true)
@@ -161,6 +158,49 @@ class TripsResultsActivity : AppCompatActivity() {
         subCategory_id = event.subCategory_id
         priceFrom = event.priceFrom
         priceTo = event.priceTo
+    }
+
+    // get countries
+    private val getAllTrip = object : LoaderManager.LoaderCallbacks<List<DataItem>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<DataItem>> {
+            return GetSearchResultsAsyncTaskLoader(this@TripsResultsActivity)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<DataItem>>, data: List<DataItem>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null && data.isNotEmpty()) {
+                with(modelList){
+                    clear()
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                mAdapter?.notifyDataSetChanged()
+                isEmptyData()
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<DataItem>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+
+    fun isEmptyData(){
+        if (modelList.size != 0){
+            noData.visibility = View.GONE
+        }else{
+            noData.visibility = View.VISIBLE
+        }
+
+        if (swipeRefreshRecyclerList!!.isRefreshing)
+            swipeRefreshRecyclerList!!.isRefreshing = false
     }
 
 

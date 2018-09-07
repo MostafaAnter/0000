@@ -14,6 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 import travel.com.bookTrip.models.ReservationResponse;
 import travel.com.myBookings.models.MyReservationsResponse;
@@ -61,7 +62,7 @@ public interface ApiInterface {
                                                               @Path("category_id") String category_id);
 
 
-    @GET
+    @GET(".")
     Observable<SearchResults> search(@Header("Accept") String accept, @Header("Authorization") String authorization,
                                      @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                      @Header("User-Agent") String userAgent,
@@ -77,6 +78,11 @@ public interface ApiInterface {
                                      @Query("has_internet") String has_internet,
                                      @Query("has_parking") String has_parking,
                                      @Query("allow_pets") String allow_pets);
+
+    @GET(".")
+    Observable<SearchResults> searchNextUrl(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                     @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                     @Header("User-Agent") String userAgent);
 
 
     @GET("companies")

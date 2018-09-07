@@ -23,4 +23,5 @@
     <string name="title_activity_book_trip">BookTripActivity</string>
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="title_activity_sign_out">SignOutActivity</string>
+    <string name="there_no_results">لا توجد نتائج حاول مرة اخرى...</string>
 </resources>
