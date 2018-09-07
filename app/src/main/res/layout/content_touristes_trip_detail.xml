@@ -136,7 +136,7 @@
                     android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="from 10/5/2018 to 12/10/2018"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
             <FrameLayout
@@ -144,6 +144,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="100dp">
                 <ImageView
+                    android:id="@+id/mainImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
@@ -163,7 +164,7 @@
                         android:id="@+id/text7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="290 EL"
+                        android:text=""
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -185,24 +186,30 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent">
                     <ImageView
+                        android:id="@+id/smallImage3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="1dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/border_shape_grey_without_border"
                         android:adjustViewBounds="true"/>
                     <ImageView
+                        android:id="@+id/smallImage2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="1dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/border_shape_grey_without_border"
                         android:adjustViewBounds="true"/>
                     <ImageView
+                        android:id="@+id/smallImage1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="1dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/border_shape_grey_without_border"
                         android:adjustViewBounds="true"/>
                 </LinearLayout>
@@ -213,24 +220,30 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent">
                     <ImageView
+                        android:id="@+id/smallImage6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:scaleType="fitXY"
                         android:padding="1dp"
                         android:src="@drawable/border_shape_grey_without_border"
                         android:adjustViewBounds="true"/>
                     <ImageView
+                        android:id="@+id/smallImage5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="1dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/border_shape_grey_without_border"
                         android:adjustViewBounds="true"/>
                     <ImageView
+                        android:id="@+id/smallImage4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="1dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/border_shape_grey_without_border"
                         android:adjustViewBounds="true"/>
                 </LinearLayout>
