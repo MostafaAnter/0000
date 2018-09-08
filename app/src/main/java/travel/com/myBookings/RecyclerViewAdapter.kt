@@ -84,7 +84,7 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
                 itemView.ratingBar.rating = this?.trip?.stars!!.toFloat()
                 itemView.ratingValue.text = this.trip.stars.toFloat().toString()
 
-                itemView.item_txt_booking_num.text = "رقم الرحلة " + trip_id
+                itemView.item_txt_booking_num.text = "  رقم الرحلة " + trip_id
 
 
 

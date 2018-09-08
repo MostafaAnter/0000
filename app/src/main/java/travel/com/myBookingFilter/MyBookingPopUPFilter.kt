@@ -56,7 +56,7 @@ class MyBookingPopUPFilter : AppCompatActivity(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
-        window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     }
