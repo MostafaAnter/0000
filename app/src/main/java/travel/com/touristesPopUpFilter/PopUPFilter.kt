@@ -55,7 +55,7 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
             categoryPicker -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("النوع الرئيسي")
-                        .setSingleChoiceItems(categories.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(categories.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             textSubCategory.text = "النوع الفرعيي"
                             category_id = categoriesObjects[which].id.toString()
@@ -73,7 +73,7 @@ class PopUPFilter : AppCompatActivity(), View.OnClickListener {
                 val builder = AlertDialog.Builder(this)
 
                 builder.setTitle("النوع الفرعي")
-                        .setSingleChoiceItems(subCategories.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(subCategories.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
 
                             textSubCategory.text = subCategories.get(which)
                             category_id = subCategoriesObjects[which].category_id.toString()

@@ -41,8 +41,15 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
                         .putExtra("item", tripItem.member as Parcelable))
             }
             R.id.button6 -> {
-                startActivity(Intent(this@TouristesTripDetailActivity, BookTripActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .putExtra("item", tripItem as Parcelable))
+
+                if (TravellawyPrefStore(this).getPreferenceValue(Constants.AUTHORIZATION, "empty")
+                        !!.contentEquals("empty")) {
+                    startActivity(Intent(this@TouristesTripDetailActivity, SignInActivity::class.java))
+                    overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
+                }else{
+                    startActivity(Intent(this@TouristesTripDetailActivity, BookTripActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            .putExtra("item", tripItem as Parcelable))
+                }
             }
         }
     }

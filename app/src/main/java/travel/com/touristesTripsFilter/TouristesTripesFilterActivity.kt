@@ -73,7 +73,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
                     builder.create().show()
                 } else {
                     builder.setTitle("اختر المدينة")
-                            .setSingleChoiceItems(citiesOfEgy.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                            .setSingleChoiceItems(citiesOfEgy.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
 
                                 text2.text = citiesOfEgy.get(which)
 
@@ -95,7 +95,7 @@ class TouristesTripesFilterActivity : AppCompatActivity(), View.OnClickListener 
             R.id.country_picker -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("اختر الدولة")
-                        .setSingleChoiceItems(countries.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(countries.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text2.text = "-"
                             country_id = countriesObjects[which].id.toString()

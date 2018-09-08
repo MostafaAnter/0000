@@ -36,7 +36,7 @@ class MyBookingPopUPFilter : AppCompatActivity(), View.OnClickListener {
             categoryPicker -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("أختر حالة")
-                        .setSingleChoiceItems(statusSet.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(statusSet.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
 
                             textCategory.text = statusSet[which]
                             status = statusObjects[which].statusValue

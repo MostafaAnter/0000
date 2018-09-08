@@ -91,7 +91,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             adults_num_picker-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("عدد الاشخاص البالغين")
-                        .setSingleChoiceItems(bigNumbersList.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(bigNumbersList.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text9.text = bigNumbersList[which]
                             adult_count = bigNumbersList[which]
@@ -104,7 +104,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             child_count_picker-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("عدد الأطفال")
-                        .setSingleChoiceItems(smallNumbersList.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(smallNumbersList.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text11.text = smallNumbersList[which]
                             child_count = smallNumbersList[which]
@@ -180,7 +180,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room_count_picker-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("عدد الغرف")
-                        .setSingleChoiceItems(smallNumbersList.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(smallNumbersList.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text23.text = smallNumbersList[which]
                             room_count = smallNumbersList[which]
@@ -257,7 +257,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             child1_age-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("سن الطفل")
-                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text13.text = childrenAgesText[which]
                             child_ages.add(childrenAges[which])
@@ -270,7 +270,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             child2_age-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("سن الطفل")
-                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text15.text = childrenAgesText[which]
                             child_ages.add(childrenAges[which])
@@ -283,7 +283,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             child3_age-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("سن الطفل")
-                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text17.text = childrenAgesText[which]
                             child_ages.add(childrenAges[which])
@@ -296,7 +296,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             child4_age-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("سن الطفل")
-                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text19.text = childrenAgesText[which]
                             child_ages.add(childrenAges[which])
@@ -309,7 +309,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             child5_age-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("سن الطفل")
-                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(childrenAgesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text21.text = childrenAgesText[which]
                             child_ages.add(childrenAges[which])
@@ -323,7 +323,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room1_type-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("نوع الغرفة")
-                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text25.text = roomsTypesText[which]
                             room_types.add(roomsTypes[which])
@@ -336,7 +336,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room2_type-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("نوع الغرفة")
-                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text27.text = roomsTypesText[which]
                             room_types.add(roomsTypes[which])
@@ -349,7 +349,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room3_type-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("نوع الغرفة")
-                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text29.text = roomsTypesText[which]
                             room_types.add(roomsTypes[which])
@@ -362,7 +362,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room4_type-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("نوع الغرفة")
-                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text31.text = roomsTypesText[which]
                             room_types.add(roomsTypes[which])
@@ -375,7 +375,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room5_type-> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("نوع الغرفة")
-                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), 0, DialogInterface.OnClickListener { dialog, which ->
+                        .setSingleChoiceItems(roomsTypesText.toTypedArray(), -1, DialogInterface.OnClickListener { dialog, which ->
                             // reset cities
                             text33.text = roomsTypesText[which]
                             room_types.add(roomsTypes[which])
@@ -479,11 +479,10 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun checkReservationValidation(): Boolean {
         note = editText5.text.toString().trim{ it <= ' ' }
-        if (TextUtils.isEmpty(note)) {
-            sweetDialogHelper?.showErrorMessage("فشل !", "أدخل الملاحضات")
+        if (adult_count?.toInt()!! < 1) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "حدد عدد الأشخاص")
             return false
         }
-
         if (child_count?.toInt()!! > childrenAges.size) {
             sweetDialogHelper?.showErrorMessage("فشل !", "حدد سن الأطفال")
             return false
@@ -496,12 +495,12 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             sweetDialogHelper?.showErrorMessage("فشل !", "حدد عدد الغرف")
             return false
         }
-        if (adult_count?.toInt()!! < 1) {
-            sweetDialogHelper?.showErrorMessage("فشل !", "حدد عدد الأشخاص")
-            return false
-        }
         if (payment_method == null) {
             sweetDialogHelper?.showErrorMessage("فشل !", "أختر طريقة دفع")
+            return false
+        }
+        if (TextUtils.isEmpty(note)) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "أدخل الملاحضات")
             return false
         }
 
@@ -531,7 +530,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
                     override fun onNext(signUpResult: ReservationResponse?) {
                         if (signUpResult?.code != 100 ){
                             sdh.dismissDialog()
-                            sdh.showErrorMessage("فشل!", signUpResult?.message)
+                            sdh.showErrorMessage("فشل!", "طريقة دفع غير متاحة الان")
                             return
                         }
 
