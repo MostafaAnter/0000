@@ -160,6 +160,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/adults_num_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -216,6 +217,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/child_count_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -272,6 +274,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/child1_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -286,7 +289,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="  سن الطفل" />
+                    android:text="سن الطفل 1" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -314,7 +317,7 @@
                         android:gravity="center_vertical"
                         android:maxEms="12"
                         android:maxLines="1"
-                        android:text="سن الطفل"
+                        android:text="سن الطفل 1"
                         android:textColor="@color/colorAccent" />
 
                     <ImageView
@@ -328,6 +331,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/child2_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -342,7 +346,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="سن الطفل2" />
+                    android:text="سن الطفل 2" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -384,6 +388,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/child3_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -398,7 +403,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="سن الطفل3" />
+                    android:text="سن الطفل 3" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -440,6 +445,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/child4_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -454,7 +460,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="سن الطفل4" />
+                    android:text="سن الطفل 4" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -496,6 +502,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/child5_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -510,7 +517,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="سن الطفل5" />
+                    android:text="سن الطفل 5" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -552,6 +559,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/room_count_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -608,6 +616,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/room1_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -622,7 +631,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="  نوع الغرفة" />
+                    android:text="نوع الغرفة 1" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -664,6 +673,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/room2_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -678,7 +688,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="نوع الغرفة2" />
+                    android:text="نوع الغرفة 2" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -720,6 +730,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/room3_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -734,7 +745,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="نوع الغرفة3" />
+                    android:text="نوع الغرفة 3" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -776,6 +787,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/room4_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -790,7 +802,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="نوع الغرفة4" />
+                    android:text="نوع الغرفة 4" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
@@ -832,6 +844,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/room5_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -846,7 +859,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="110dp"
-                    android:text="نوع الغرف5" />
+                    android:text="نوع الغرف 5" />
 
                 <View
                     android:layout_width="@dimen/activity_horizontal_margin"
