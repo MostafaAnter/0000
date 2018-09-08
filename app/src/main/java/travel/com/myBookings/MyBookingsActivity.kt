@@ -36,7 +36,7 @@ class MyBookingsActivity : AppCompatActivity() {
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
     // vars for search
-    var statu: String = "."
+    var statu: String = ""
 
     companion object {
         var nextUrl: String = ""
@@ -148,7 +148,7 @@ class MyBookingsActivity : AppCompatActivity() {
         override fun onLoadFinished(
                 loader: Loader<List<DataItem>>, data: List<DataItem>?) {
             // Display our data, for instance updating our adapter
-            if (data != null && data.isNotEmpty()) {
+            if (data != null) {
                 with(modelList){
                     clear()
                     data.forEach{

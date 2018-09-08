@@ -3,6 +3,7 @@ package travel.com.loaders
 
 import android.content.Context
 import android.support.v4.content.AsyncTaskLoader
+import android.util.Log
 import rx.Subscriber
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -22,7 +23,7 @@ import java.io.*
  * Created by mostafa_anter on 5/5/17.
  */
 
-class GetMyBookingsAsyncTaskLoader(context: Context, private val path: String = ".") : AsyncTaskLoader<List<DataItem>>(context) {
+class GetMyBookingsAsyncTaskLoader(context: Context, private val path: String = "") : AsyncTaskLoader<List<DataItem>>(context) {
 
     private var mData: List<DataItem>? = null
     private val downloadedFile = File(
@@ -57,7 +58,8 @@ class GetMyBookingsAsyncTaskLoader(context: Context, private val path: String = 
 
     override fun loadInBackground(): List<DataItem>? {
         val getCategories = apiService.getReservations(BuildConfig.Header_Accept,
-                store.getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+//                store.getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                "aO1PaV2W3s3nRJGq4otcCZpugBgE8CHdBsK0EKhlfku2lnJ50D5fZQflzkda",
                 BuildConfig.From,
                 BuildConfig.Accept_Language,
                 BuildConfig.User_Agent, path)
@@ -66,16 +68,19 @@ class GetMyBookingsAsyncTaskLoader(context: Context, private val path: String = 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<MyReservationsResponse>() {
                     override fun onCompleted() {
-
+                        Log.e("", "")
                     }
 
                     override fun onError(e: Throwable) {
-
+                        Log.e("", e.message)
                     }
 
                     override fun onNext(getCountriesResult: MyReservationsResponse) {
                         mData = getCountriesResult.paginator?.data
-                        MyBookingsActivity.nextUrl = getCountriesResult?.paginator?.next_page_url!!
+
+                        if (getCountriesResult.paginator.next_page_url != null) {
+                            MyBookingsActivity.nextUrl = getCountriesResult.paginator.next_page_url
+                        }
                         deliverResult(mData)
                         deleteFileContent(downloadedFile)
                         saveObjectsInsideFile(downloadedFile, mData!!)
