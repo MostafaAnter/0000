@@ -1,3 +1,7 @@
 package travel.com.myBookings.models
 
-data class RoomTypes(val roomTypes: String = "")
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class RoomTypes(val roomTypes: String = ""): Parcelable

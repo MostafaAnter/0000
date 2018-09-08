@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_bookings_list.view.*
 import travel.com.R
+import travel.com.myBookings.models.DataItem
 import travel.com.utility.CircleTransform
 import travel.com.utility.Constants
 import travel.com.utility.Util
@@ -17,11 +18,11 @@ import java.util.*
 /**
  * A custom adapter to use with the RecyclerView widget.
  */
-class RecyclerViewAdapter(private val mContext: Context, private var modelList: ArrayList<MyBookingsModel>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerViewAdapter(private val mContext: Context, private var modelList: ArrayList<DataItem>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mItemClickListener: OnItemClickListener? = null
 
-    fun updateList(modelList: ArrayList<MyBookingsModel>) {
+    fun updateList(modelList: ArrayList<DataItem>) {
         this.modelList = modelList
         notifyDataSetChanged()
 
@@ -54,13 +55,13 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
         this.mItemClickListener = mItemClickListener
     }
 
-    private fun getItem(position: Int): MyBookingsModel {
+    private fun getItem(position: Int): DataItem {
         return modelList!![position]
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int, model: MyBookingsModel)
+        fun onItemClick(view: View, position: Int, model: DataItem)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -71,13 +72,24 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
 
         }
 
-        fun bindTrip(myBookingsModel: MyBookingsModel?) {
+        fun bindTrip(myBookingsModel: DataItem?) {
             with(myBookingsModel) {
-                itemView.item_txt_title.text = this?.title
-                itemView.item_txt_message.text = this?.message
+                itemView.item_txt_title.text = this?.trip?.title
+
+                // todo difference between start date and end date
+                val dayNum = Util.printDifference(Util.conVertDateTextToObject(this?.trip?.start_date?: ""),
+                        Util.conVertDateTextToObject(this?.trip?.end_date?: ""))
+                itemView.item_txt_message.text = "$dayNum" + " أيام" + " / " + "${dayNum - 1}" + " ليالى"
+
+                itemView.ratingBar.rating = this?.trip?.stars!!.toFloat()
+                itemView.ratingValue.text = this.trip.stars.toFloat().toString()
+
+                itemView.item_txt_booking_num.text = "رقم الرحلة " + trip_id
+
+
 
                 Glide.with(mContext)   // pass Context
-                        .load(R.drawable.cdn) // add your image url
+                        .load(trip.image) // add your image url
                         .transform(CircleTransform(mContext)) // applying the image transformer
                         .into(itemView.img_user)
 

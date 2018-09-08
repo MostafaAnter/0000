@@ -1,3 +1,7 @@
 package travel.com.myBookings.models
 
-data class ChildAges(val childAges: String = "")
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class ChildAges(val childAges: String = ""): Parcelable

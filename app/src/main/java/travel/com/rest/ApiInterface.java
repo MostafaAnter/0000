@@ -136,10 +136,11 @@ notefdsf
 
     /*دا لعرض الرحلات المحجوزة للعضو طيب لو عايز بقى تعمل لحالة معينة يبقى url/0 'r_status_0' => ' فى انتظار السعر ', 'r_status_1' => ' فى انتظار تاكيد العميل', 'r_status_2' => ' فى انتظار تاكيد الدفع ', 'r_status_3' => ' تم الحجز ',*/
 
-    @GET("member/reservations/")
+    @GET("member/reservations/{status}")
     Observable<MyReservationsResponse> getReservations(@Header("Accept") String accept, @Header("Authorization") String authorization,
                                                        @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
-                                                       @Header("User-Agent") String userAgent);
+                                                       @Header("User-Agent") String userAgent,
+                                                       @Path("status") String status);
 
     @FormUrlEncoded
     @POST("trips/comment")
