@@ -58,8 +58,7 @@ class GetMyBookingsAsyncTaskLoader(context: Context, private val path: String = 
 
     override fun loadInBackground(): List<DataItem>? {
         val getCategories = apiService.getReservations(BuildConfig.Header_Accept,
-//                store.getPreferenceValue(Constants.AUTHORIZATION, "empty"),
-                "aO1PaV2W3s3nRJGq4otcCZpugBgE8CHdBsK0EKhlfku2lnJ50D5fZQflzkda",
+                store.getPreferenceValue(Constants.AUTHORIZATION, "empty"),
                 BuildConfig.From,
                 BuildConfig.Accept_Language,
                 BuildConfig.User_Agent, path)

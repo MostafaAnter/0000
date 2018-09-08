@@ -6,8 +6,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DataItem(val note: String? = "",
                     val trip_id: String? = "",
-                    val childCount: String? = "",
-                    val roomCount: String? = "",
+                    val child_count: String? = "",
+                    val room_count: String? = "",
                     val created_at: String? = "",
                     val child_ages: List<ChildAges>?,
                     val payment_method_text: String? = "",

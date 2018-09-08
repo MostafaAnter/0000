@@ -178,7 +178,7 @@ class TripsResultsActivity : AppCompatActivity() {
         override fun onLoadFinished(
                 loader: Loader<List<DataItem>>, data: List<DataItem>?) {
             // Display our data, for instance updating our adapter
-            if (data != null && data.isNotEmpty()) {
+            if (data != null) {
                 with(modelList){
                     clear()
                     data.forEach{

@@ -3,6 +3,7 @@ package travel.com.myBookings
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Parcelable
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
 import android.support.v4.widget.SwipeRefreshLayout
@@ -104,7 +105,9 @@ class MyBookingsActivity : AppCompatActivity() {
 
         mAdapter!!.SetOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener{
             override  fun onItemClick(view: View, position: Int, model: DataItem) {
-                startActivity(Intent(this@MyBookingsActivity, BookingDetailsActivity::class.java))
+                val intent = Intent(this@MyBookingsActivity, BookingDetailsActivity::class.java)
+                intent.putExtra("item", modelList[position] as Parcelable)
+                startActivity(intent)
             }
         })
 
