@@ -1,11 +1,13 @@
 package travel.com.bookTrip
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.View
 import kotlinx.android.synthetic.main.activity_book_trip.*
 import travel.com.R
@@ -13,9 +15,15 @@ import travel.com.utility.Constants
 import travel.com.utility.Util
 import android.widget.RadioButton
 import kotlinx.android.synthetic.main.content_book_trip.*
+import rx.Subscriber
 import rx.Subscription
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import travel.com.BuildConfig
+import travel.com.bookTrip.models.ReservationResponse
 import travel.com.rest.ApiClient
 import travel.com.rest.ApiInterface
+import travel.com.store.TravellawyPrefStore
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
 import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.SweetDialogHelper
@@ -39,15 +47,14 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var sweetDialogHelper: SweetDialogHelper
 
     // for make reservation request
-    var userAgent: String? = null
     var trip_id: String? = null
-    var adult_count: String? = null
-    var child_count: String? = null
-    var room_count: String? = null
+    var adult_count: String? = "0"
+    var child_count: String? = "0"
+    var room_count: String? = "0"
     var room_types = ArrayList<String>()
     var child_ages = ArrayList<String>()
     var payment_method: String? = null
-    var note: String? = null
+    var note: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +63,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
         setToolbar()
 
         tripItem = intent.getParcelableExtra("item")
-
+        trip_id = tripItem.id.toString()
         sweetDialogHelper = SweetDialogHelper(this)
         // init api service
         apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
@@ -75,6 +82,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
         room3_type.setOnClickListener(this)
         room4_type.setOnClickListener(this)
         room5_type.setOnClickListener(this)
+        button6.setOnClickListener(this)
 
     }
 
@@ -377,6 +385,15 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 builder.create().show()
             }
+            button6 ->{
+                if (Util.isOnline(this)) {
+                    if (checkReservationValidation()) {
+                        reserveTrip(sweetDialogHelper, this)
+                    }
+                } else {
+                    sweetDialogHelper.showErrorMessage("فشل !", "قم بفحص أتصال الأنترنت")
+                }
+            }
         }
     }
 
@@ -385,9 +402,7 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
                 text1, button1, text2, text3, text4, text7, text6, text8, text9, text10, text11,
                 text12, text13, text14, text15, text16, text17, text18, text19, text20,
                 text21, text22, text23, text24, text25, text26, text27, text28, text29,
-                text30, text31, text32, text33, text34, text, button6, text35, text36,
-                text37, text38, text39, radio1, radio2, radio3, radio4, editText1, editText2,
-                editText3, editText4, editText5
+                text30, text31, text32, text33, text34, text, button6, text39, radio1, radio2, radio3, radio4, editText5
         )
     }
 
@@ -406,22 +421,22 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
         when (view.getId()) {
             R.id.radio1 -> {
                 if (checked){
-                    payment_method = "1"
+                    payment_method = "4"
                 }
             }
             R.id.radio2 -> {
                 if (checked){
-                    payment_method = "2"
+                    payment_method = "3"
                 }
             }
             R.id.radio3 -> {
                 if (checked){
-                    payment_method = "3"
+                    payment_method = "2"
                 }
             }
             R.id.radio4 -> {
                 if (checked){
-                    payment_method = "4"
+                    payment_method = "1"
                 }
             }
 
@@ -461,5 +476,74 @@ class BookTripActivity : AppCompatActivity(), View.OnClickListener {
             room5_type.visibility = View.GONE
         }
     }
+
+    private fun checkReservationValidation(): Boolean {
+        note = editText5.text.toString().trim{ it <= ' ' }
+        if (TextUtils.isEmpty(note)) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "أدخل الملاحضات")
+            return false
+        }
+
+        if (child_count?.toInt()!! > childrenAges.size) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "حدد سن الأطفال")
+            return false
+        }
+        if (room_count?.toInt()!! > room_types.size) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "حدد نوع الغرف")
+            return false
+        }
+        if (room_count?.toInt()!! < 1) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "حدد عدد الغرف")
+            return false
+        }
+        if (adult_count?.toInt()!! < 1) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "حدد عدد الأشخاص")
+            return false
+        }
+        if (payment_method == null) {
+            sweetDialogHelper?.showErrorMessage("فشل !", "أختر طريقة دفع")
+            return false
+        }
+
+        return true
+    }
+
+    private fun reserveTrip(sdh: SweetDialogHelper, mContext: Context) {
+        sdh.showMaterialProgress(getString(R.string.loading))
+        val loginNormal = apiService?.reserveTrip(BuildConfig.Header_Accept,
+                TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                BuildConfig.From,
+                BuildConfig.Accept_Language, BuildConfig.User_Agent,
+                trip_id, adult_count, child_count, room_count, room_types, child_ages, payment_method, note)
+        subscription1 = loginNormal
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Subscriber<ReservationResponse>() {
+                    override fun onCompleted() {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        sdh.dismissDialog()
+                        sdh.showErrorMessage("Error!", e.message)
+                    }
+
+                    override fun onNext(signUpResult: ReservationResponse?) {
+                        if (signUpResult?.code != 100 ){
+                            sdh.dismissDialog()
+                            sdh.showErrorMessage("فشل!", signUpResult?.message)
+                            return
+                        }
+
+                        sdh.dismissDialog()
+                        sdh.showSuccessfulMessage("Done!", "تم ارسال طلب الحجز بنجاح.") {
+                            finish()
+                        }
+
+                    }
+                })
+
+    }
+
 
 }
