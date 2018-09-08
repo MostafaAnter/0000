@@ -46,6 +46,7 @@ class TripsResultsActivity : AppCompatActivity() {
     var subCategory_id: String? = null
     var priceFrom: String? = null
     var priceTo: String? = null
+    var member_id: String? = null
 
     // for load more data
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
@@ -67,6 +68,7 @@ class TripsResultsActivity : AppCompatActivity() {
         region = intent.extras.getString("region", null)
         country_id = intent.extras.getString("country_id", null)
         city_id = intent.extras.getString("city_id", null)
+        member_id = intent.extras.getString("member_id", null)
 
         swipeRefreshRecyclerList!!.setOnRefreshListener {
             getDate()

@@ -3,6 +3,7 @@ package travel.com.touristesTripDetail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -36,7 +37,8 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button1 -> {
-                startActivity(Intent(this@TouristesTripDetailActivity, CompaniesDetailActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                startActivity(Intent(this@TouristesTripDetailActivity, CompaniesDetailActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .putExtra("item", tripItem.member as Parcelable))
             }
             R.id.button6 -> {
                 startActivity(Intent(this@TouristesTripDetailActivity, BookTripActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))

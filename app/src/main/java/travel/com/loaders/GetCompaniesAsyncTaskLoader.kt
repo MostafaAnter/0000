@@ -14,7 +14,7 @@ import travel.com.rest.ApiInterface
 import travel.com.store.TravellawyPrefStore
 import travel.com.touristesCompanies.TouristesCompanies
 import travel.com.touristesCompanies.models.CompaniesResponse
-import travel.com.touristesCompanies.models.DataItem
+import travel.com.touristesTripResults.models.Member
 import travel.com.utility.Constants
 import travel.com.utility.Util
 import java.io.*
@@ -23,9 +23,9 @@ import java.io.*
  * Created by mostafa_anter on 5/5/17.
  */
 
-class GetCompaniesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<DataItem>>(context) {
+class GetCompaniesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<Member>>(context) {
 
-    private var mData: List<DataItem>? = null
+    private var mData: List<Member>? = null
     private val downloadedFile = File(
             getContext().filesDir, FILE_NAME)
 
@@ -45,7 +45,7 @@ class GetCompaniesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<DataI
             // use cashed data
             deliverResult(mData)
         }
-        Util.ReadObjectsFromFile<DataItem>({
+        Util.ReadObjectsFromFile<Member>({
             mData = it
             if (mData != null) {
                 // use cashed data
@@ -56,7 +56,7 @@ class GetCompaniesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<DataI
         }, downloadedFile).execute()
     }
 
-    override fun loadInBackground(): List<DataItem>? {
+    override fun loadInBackground(): List<Member>? {
         val getCategories = apiService.getCompanies(BuildConfig.Header_Accept,
                 store.getPreferenceValue(Constants.AUTHORIZATION, "empty"),
                 BuildConfig.From,
@@ -91,7 +91,7 @@ class GetCompaniesAsyncTaskLoader(context: Context) : AsyncTaskLoader<List<DataI
         return null
     }
 
-    override fun deliverResult(data: List<DataItem>?) {
+    override fun deliverResult(data: List<Member>?) {
         // We’ll save the data for later retrieval
         mData = data
         // We can do any pre-processing we want here

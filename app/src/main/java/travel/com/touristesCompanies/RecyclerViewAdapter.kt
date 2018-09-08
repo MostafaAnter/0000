@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_companies_list.view.*
 import travel.com.R
-import travel.com.touristesCompanies.models.DataItem
+import travel.com.touristesTripResults.models.Member
 import travel.com.utility.CircleTransform
 import travel.com.utility.Constants
 import travel.com.utility.Util
@@ -20,11 +20,11 @@ import java.util.*
 /**
  * A custom adapter to use with the RecyclerView widget.
  */
-class RecyclerViewAdapter(private val mContext: Context, private var modelList: ArrayList<DataItem>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerViewAdapter(private val mContext: Context, private var modelList: ArrayList<Member>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mItemClickListener: OnItemClickListener? = null
 
-    fun updateList(modelList: ArrayList<DataItem>) {
+    fun updateList(modelList: ArrayList<Member>) {
         this.modelList = modelList
         notifyDataSetChanged()
 
@@ -54,13 +54,13 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
         this.mItemClickListener = mItemClickListener
     }
 
-    private fun getItem(position: Int): DataItem {
+    private fun getItem(position: Int): Member {
         return modelList!![position]
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int, model: DataItem)
+        fun onItemClick(view: View, position: Int, model: Member)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -71,7 +71,7 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
 
         }
 
-        fun bindCompany(model: DataItem?){
+        fun bindCompany(model: Member?){
             with(model){
                 itemView.item_txt_title.text = this?.name
                 itemView.item_txt_message.text = this?.email

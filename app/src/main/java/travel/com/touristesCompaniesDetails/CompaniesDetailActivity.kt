@@ -30,7 +30,8 @@ import travel.com.rest.ApiInterface
 import travel.com.signIn.SignInActivity
 import travel.com.store.TravellawyPrefStore
 import travel.com.touristesCompanies.models.CommentResponse
-import travel.com.touristesCompanies.models.DataItem
+import travel.com.touristesTripResults.TripsResultsActivity
+import travel.com.touristesTripResults.models.Member
 import travel.com.utility.Constants
 import travel.com.utility.SweetDialogHelper
 import travel.com.utility.Util
@@ -46,8 +47,7 @@ class CompaniesDetailActivity : AppCompatActivity() {
     private var apiService: ApiInterface? = null
     private var subscription1: Subscription? = null
 
-
-    private lateinit var tripItem: DataItem
+    private lateinit var tripItem: Member
 
     private lateinit var sweetDialogHelper: SweetDialogHelper
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,6 +167,11 @@ class CompaniesDetailActivity : AppCompatActivity() {
             }
             button3.setOnClickListener {
                 makeCallWithPermissionCheck(mobile)
+            }
+
+            button4.setOnClickListener {
+                startActivity(Intent(this@CompaniesDetailActivity, TripsResultsActivity::class.java)
+                        .putExtra("member_id", id))
             }
 
             member_comments?.forEach {

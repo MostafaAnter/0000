@@ -17,8 +17,8 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_touristes_companies.*
 import travel.com.R
 import travel.com.loaders.GetCompaniesAsyncTaskLoader
-import travel.com.touristesCompanies.models.DataItem
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
+import travel.com.touristesTripResults.models.Member
 import travel.com.utility.*
 import java.util.*
 
@@ -29,7 +29,7 @@ class TouristesCompanies : AppCompatActivity() {
     private var swipeRefreshRecyclerList: SwipeRefreshLayout? = null
     private var mAdapter: RecyclerViewAdapter? = null
 
-    private val modelList = ArrayList<DataItem>()
+    private val modelList = ArrayList<Member>()
     val layoutManager = LinearLayoutManager(this)
 
     // for load more data
@@ -99,7 +99,7 @@ class TouristesCompanies : AppCompatActivity() {
 
 
         mAdapter!!.SetOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int, model: DataItem) {
+            override fun onItemClick(view: View, position: Int, model: Member) {
 
                 val intent = Intent(this@TouristesCompanies, CompaniesDetailActivity::class.java)
                 intent.putExtra("item", modelList[position] as Parcelable)
@@ -124,14 +124,14 @@ class TouristesCompanies : AppCompatActivity() {
     }
 
     // get countries
-    private val getCompanies = object : LoaderManager.LoaderCallbacks<List<DataItem>> {
+    private val getCompanies = object : LoaderManager.LoaderCallbacks<List<Member>> {
         override fun onCreateLoader(
-                id: Int, args: Bundle?): Loader<List<DataItem>> {
+                id: Int, args: Bundle?): Loader<List<Member>> {
             return GetCompaniesAsyncTaskLoader(this@TouristesCompanies)
         }
 
         override fun onLoadFinished(
-                loader: Loader<List<DataItem>>, data: List<DataItem>?) {
+                loader: Loader<List<Member>>, data: List<Member>?) {
             // Display our data, for instance updating our adapter
             if (data != null && data.isNotEmpty()) {
                 with(modelList){
@@ -145,7 +145,7 @@ class TouristesCompanies : AppCompatActivity() {
             }
         }
 
-        override fun onLoaderReset(loader: Loader<List<DataItem>>) {
+        override fun onLoaderReset(loader: Loader<List<Member>>) {
             // Loader reset, throw away our data,
             // unregister any listeners, etc.
             // Of course, unless you use destroyLoader(),
