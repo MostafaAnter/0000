@@ -1,6 +1,8 @@
 package travel.com.bookTrip
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_book_trip.*
@@ -9,15 +11,35 @@ import travel.com.utility.Constants
 import travel.com.utility.Util
 import android.widget.RadioButton
 import kotlinx.android.synthetic.main.content_book_trip.*
+import rx.Subscription
+import travel.com.rest.ApiClient
+import travel.com.rest.ApiInterface
+import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
+import travel.com.touristesTripResults.models.DataItem
+import travel.com.utility.SweetDialogHelper
 
 
 class BookTripActivity : AppCompatActivity() {
+
+    private lateinit var tripItem: DataItem
+
+    private var apiService: ApiInterface? = null
+    private var subscription1: Subscription? = null
+    private lateinit var sweetDialogHelper: SweetDialogHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_trip)
         changeViewsFonts()
         setToolbar()
+
+        tripItem = intent.getParcelableExtra("item")
+
+        sweetDialogHelper = SweetDialogHelper(this)
+        // init api service
+        apiService = ApiClient.getClient()!!.create(ApiInterface::class.java)
+        bindView()
+
     }
 
     fun changeViewsFonts() {
@@ -65,6 +87,27 @@ class BookTripActivity : AppCompatActivity() {
                 }
             }
 
+        }
+    }
+
+    fun bindView(){
+        with(tripItem){
+            text2.text = member?.name
+            button1.setOnClickListener {
+                startActivity(Intent(this@BookTripActivity, CompaniesDetailActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .putExtra("item", tripItem.member as Parcelable))
+            }
+
+            text3.text = title
+
+            val dayNum = Util.printDifference(Util.conVertDateTextToObject(start_date?: ""),
+                    Util.conVertDateTextToObject(end_date?: ""))
+
+            text4.text = "$dayNum" + " أيام" + " / " + "${dayNum - 1}" + " ليالى"
+            ratingBar.rating = stars!!.toFloat()
+
+            ratingValue.text =  stars.toFloat().toString()
+            text6.text = "from $start_date to $end_date"
         }
     }
 

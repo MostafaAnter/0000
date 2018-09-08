@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
     tools:context=".bookTrip.BookTripActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_book_trip">
 
     <android.support.v4.widget.NestedScrollView
@@ -37,14 +38,14 @@
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  احدي رحلات شركة"
+                        android:text="  احدي رحلات "
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ايجبت ترافل"
+                        android:text=""
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
@@ -64,7 +65,8 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_horizontal_margin">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -73,19 +75,18 @@
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="منتجع شرم كليف"
+                        android:text=""
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/text4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4 ايام / 3 ليالي"
+                        android:text=""
                         android:textColor="@color/colorAccent" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:gravity="bottom|end">
@@ -95,7 +96,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
-                        android:rating="3.5"
                         android:numStars="5"
                         style="@style/Widget.AppCompat.RatingBar.Small"/>
 
@@ -103,7 +103,7 @@
                         android:id="@+id/ratingValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="8.5"
+                        android:text=""
                         android:padding="5dp"
                         android:textColor="@android:color/white"
                         android:background="@drawable/gradiant_background"/>
@@ -129,7 +129,7 @@
                     android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="from 10/5/2018 to 12/10/2018"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
@@ -173,6 +173,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="عدد الأشخاص" />
 
                 <View
@@ -190,7 +191,7 @@
 
                     <TextView
                         android:id="@+id/text9"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -225,6 +226,7 @@
 
                 <TextView
                     android:id="@+id/text10"
+                    android:minWidth="110dp"
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -245,7 +247,7 @@
 
                     <TextView
                         android:id="@+id/text11"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -283,6 +285,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="  سن الطفل" />
 
                 <View
@@ -300,7 +303,7 @@
 
                     <TextView
                         android:id="@+id/text13"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -338,6 +341,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="سن الطفل2" />
 
                 <View
@@ -355,7 +359,7 @@
 
                     <TextView
                         android:id="@+id/text15"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -393,6 +397,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="سن الطفل3" />
 
                 <View
@@ -410,7 +415,7 @@
 
                     <TextView
                         android:id="@+id/text17"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -448,6 +453,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="سن الطفل4" />
 
                 <View
@@ -465,7 +471,7 @@
 
                     <TextView
                         android:id="@+id/text19"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -503,6 +509,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="سن الطفل5" />
 
                 <View
@@ -520,7 +527,7 @@
 
                     <TextView
                         android:id="@+id/text21"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -558,6 +565,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="عدد الغرف  " />
 
                 <View
@@ -575,7 +583,7 @@
 
                     <TextView
                         android:id="@+id/text23"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -613,6 +621,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="  نوع الغرفة" />
 
                 <View
@@ -630,7 +639,7 @@
 
                     <TextView
                         android:id="@+id/text25"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -668,6 +677,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="نوع الغرفة2" />
 
                 <View
@@ -685,7 +695,7 @@
 
                     <TextView
                         android:id="@+id/text27"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -723,6 +733,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="نوع الغرفة3" />
 
                 <View
@@ -740,7 +751,7 @@
 
                     <TextView
                         android:id="@+id/text29"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -778,6 +789,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="نوع الغرفة4" />
 
                 <View
@@ -795,7 +807,7 @@
 
                     <TextView
                         android:id="@+id/text31"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -833,6 +845,7 @@
                     style="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="110dp"
                     android:text="نوع الغرف5" />
 
                 <View
@@ -850,7 +863,7 @@
 
                     <TextView
                         android:id="@+id/text33"
-                        style="@android:style/TextAppearance.DeviceDefault.Medium"
+                        style="@android:style/TextAppearance.DeviceDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -907,7 +920,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Large"/>
+                style="@style/TextAppearance.AppCompat"/>
             <EditText
                 android:id="@+id/editText1"
                 android:layout_width="match_parent"
@@ -930,7 +943,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Large"/>
+                style="@style/TextAppearance.AppCompat"/>
             <EditText
                 android:id="@+id/editText2"
                 android:layout_width="match_parent"
@@ -951,7 +964,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Large"/>
+                style="@style/TextAppearance.AppCompat"/>
             <EditText
                 android:id="@+id/editText3"
                 android:layout_width="match_parent"
@@ -975,7 +988,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Large"/>
+                style="@style/TextAppearance.AppCompat"/>
             <EditText
                 android:id="@+id/editText4"
                 android:layout_width="match_parent"
@@ -999,7 +1012,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Large"/>
+                style="@style/TextAppearance.AppCompat"/>
             <EditText
                 android:id="@+id/editText5"
                 android:layout_width="match_parent"

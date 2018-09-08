@@ -41,7 +41,8 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
                         .putExtra("item", tripItem.member as Parcelable))
             }
             R.id.button6 -> {
-                startActivity(Intent(this@TouristesTripDetailActivity, BookTripActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                startActivity(Intent(this@TouristesTripDetailActivity, BookTripActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .putExtra("item", tripItem as Parcelable))
             }
         }
     }
