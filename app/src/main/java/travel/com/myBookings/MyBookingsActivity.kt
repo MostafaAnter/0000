@@ -16,6 +16,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import travel.com.R
+import travel.com.loaders.GetMyBookingNextUrlsATL
 import travel.com.loaders.GetMyBookingsAsyncTaskLoader
 import travel.com.myBookingFilter.MyBookingPopUPFilter
 import travel.com.myBookingFilter.StatusObject
@@ -63,6 +64,7 @@ class MyBookingsActivity : AppCompatActivity() {
         scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 toast("جارى تحميل المزيد...")
+                getNextDate()
             }
 
         }
@@ -81,6 +83,11 @@ class MyBookingsActivity : AppCompatActivity() {
         if (!swipeRefreshRecyclerList!!.isRefreshing)
             swipeRefreshRecyclerList!!.isRefreshing = true
         supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getAllReservetions)
+
+    }
+
+    private fun getNextDate(){
+        supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getNextAllReservetions)
 
     }
 
@@ -160,6 +167,34 @@ class MyBookingsActivity : AppCompatActivity() {
                 }
                 mAdapter?.notifyDataSetChanged()
                 isEmptyData()
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<DataItem>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+    private val getNextAllReservetions = object : LoaderManager.LoaderCallbacks<List<DataItem>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<DataItem>> {
+            return GetMyBookingNextUrlsATL(this@MyBookingsActivity, nextUrl)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<DataItem>>, data: List<DataItem>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null) {
+                with(modelList){
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                mAdapter?.notifyDataSetChanged()
             }
         }
 

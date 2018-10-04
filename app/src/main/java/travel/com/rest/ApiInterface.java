@@ -90,6 +90,11 @@ public interface ApiInterface {
                                                @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                                @Header("User-Agent") String userAgent);
 
+    @GET(".")
+    Observable<CompaniesResponse> getNextCompanies(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                               @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                               @Header("User-Agent") String userAgent);
+
 
     @FormUrlEncoded
     @POST("companies/comment")
@@ -141,6 +146,10 @@ notefdsf
                                                        @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                                        @Header("User-Agent") String userAgent,
                                                        @Path("status") String status);
+    @GET(".")
+    Observable<MyReservationsResponse> getNextReservations(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                                       @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                                       @Header("User-Agent") String userAgent);
 
     @FormUrlEncoded
     @POST("trips/comment")

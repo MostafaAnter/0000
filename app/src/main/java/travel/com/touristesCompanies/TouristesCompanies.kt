@@ -17,6 +17,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_touristes_companies.*
 import travel.com.R
 import travel.com.loaders.GetCompaniesAsyncTaskLoader
+import travel.com.loaders.GetCompaniesNextAsyncTaskLoader
 import travel.com.touristesCompaniesDetails.CompaniesDetailActivity
 import travel.com.touristesTripResults.models.Member
 import travel.com.utility.*
@@ -54,6 +55,7 @@ class TouristesCompanies : AppCompatActivity() {
         scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 toast("جارى تحميل المزيد...")
+                getNextData()
             }
 
         }
@@ -72,6 +74,11 @@ class TouristesCompanies : AppCompatActivity() {
         if (!swipeRefreshRecyclerList!!.isRefreshing)
             swipeRefreshRecyclerList!!.isRefreshing = true
         supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getCompanies)
+
+    }
+
+    private fun getNextData(){
+        supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getNextCompanies)
 
     }
 
@@ -142,6 +149,35 @@ class TouristesCompanies : AppCompatActivity() {
                 }
                 mAdapter?.notifyDataSetChanged()
                 isEmptyData()
+            }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<Member>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+
+    private val getNextCompanies = object : LoaderManager.LoaderCallbacks<List<Member>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<Member>> {
+            return GetCompaniesNextAsyncTaskLoader(this@TouristesCompanies, nextUrl)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<Member>>, data: List<Member>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null && data.isNotEmpty()) {
+                with(modelList){
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                mAdapter?.notifyDataSetChanged()
             }
         }
 

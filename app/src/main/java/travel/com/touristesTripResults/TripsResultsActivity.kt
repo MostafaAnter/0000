@@ -108,8 +108,6 @@ class TripsResultsActivity : AppCompatActivity() {
     }
 
     private fun nextData(){
-        if (!swipeRefreshRecyclerList!!.isRefreshing)
-            swipeRefreshRecyclerList!!.isRefreshing = true
         supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getAllNextTrip)
 
     }
