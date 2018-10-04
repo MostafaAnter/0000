@@ -221,11 +221,14 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
 
 
         // image as file
-        val file = File(profileImagePath)
-        val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
-        val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), getBytes(inputStream))
-        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
-        Log.d("nama file e cuk", file.name)
+        var body: MultipartBody.Part? = null
+        if (!profileImagePath.isNullOrBlank()) {
+            val file = File(profileImagePath)
+            val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
+            val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), getBytes(inputStream))
+            body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+            Log.d("nama file e cuk", file.name)
+        }
 
         val signup = apiService?.signUp(BuildConfig.Header_Accept,
                 TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),

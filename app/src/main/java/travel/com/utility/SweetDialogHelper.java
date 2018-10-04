@@ -113,6 +113,12 @@ public class SweetDialogHelper {
                         sDialog.dismissWithAnimation();
                     }
                 })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                         sweetAlertDialog.dismiss();
+                    }
+                })
                 .show();
     }
 

@@ -137,6 +137,19 @@ class CompaniesDetailActivity : AppCompatActivity() {
                     .load(image) // add your image url
                     .into(image1)
 
+            item_txt_title.text = name
+            item_txt_message.text = adress ?: "" + " أذهب للخريطة!"
+
+            item_txt_message.setOnClickListener {
+                // Create a Uri from an intent string. Use the result to create an Intent.
+                val gmmIntentUri = Uri.parse("geo:" + (lat ?: "") + "," + (lng ?: ""))
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                if (mapIntent.resolveActivity(packageManager) != null) {
+                    startActivity(mapIntent)
+                }
+            }
+
             text1.text = about
 
             ratingBar.rating = stars!!.toFloat()
@@ -210,7 +223,7 @@ class CompaniesDetailActivity : AppCompatActivity() {
 
                         sdh.dismissDialog()
                         sdh.showSuccessfulMessage("Done!", "تم التعليق بنجاح") {
-                            finish()
+                            sdh.dismissDialog()
                         }
 
                     }

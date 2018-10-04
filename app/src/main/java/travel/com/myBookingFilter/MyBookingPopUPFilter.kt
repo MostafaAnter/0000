@@ -26,6 +26,8 @@ class MyBookingPopUPFilter : AppCompatActivity(), View.OnClickListener {
         changeViewsFonts()
         categoryPicker.setOnClickListener(this)
         button1.setOnClickListener(this)
+        button2.setOnClickListener(this)
+
     }
 
     override fun onClick(p0: View?) {
@@ -33,6 +35,7 @@ class MyBookingPopUPFilter : AppCompatActivity(), View.OnClickListener {
             button1 -> {
                 finish()
             }
+            button2 -> finish()
             categoryPicker -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("أختر حالة")

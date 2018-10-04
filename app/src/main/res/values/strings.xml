@@ -7,7 +7,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="booking_trip">حجز سياحية</string>
+    <string name="booking_trip">رحلات سياحية</string>
     <string name="title_activity_flight_search">FlightSearchActivity</string>
     <string name="title_activity_touristes_tripes_filter">TouristesTripesFilterActivity</string>
     <string name="title_activity_trip_results">TripResultsActivity</string>

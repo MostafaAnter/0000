@@ -87,6 +87,16 @@
             android:background="@drawable/gradiant_background"
             android:text="تصفية النتائج"
             android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/button2"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@drawable/gradiant_background"
+            android:text="إغلاق"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
     </ScrollView>
 </FrameLayout>

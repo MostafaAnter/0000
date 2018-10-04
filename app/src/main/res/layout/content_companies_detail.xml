@@ -34,6 +34,7 @@
                     android:id="@+id/image1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxHeight="220dp"
                     android:adjustViewBounds="true"
                     android:background="@color/gray"
                     android:src="@color/gray_A7A7A7" />
@@ -44,6 +45,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/item_txt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorAsPrimary"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/item_txt_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:drawableStart="@drawable/ic_location_on_black_24dp"
+                    android:text=""
+                    android:textColor="@color/blue_00B0DD"
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

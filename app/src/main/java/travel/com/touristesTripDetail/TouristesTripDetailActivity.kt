@@ -40,7 +40,7 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
                 startActivity(Intent(this@TouristesTripDetailActivity, CompaniesDetailActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         .putExtra("item", tripItem.member as Parcelable))
             }
-            R.id.button6 -> {
+            R.id.button6, R.id.button7 -> {
 
                 if (TravellawyPrefStore(this).getPreferenceValue(Constants.AUTHORIZATION, "empty")
                         !!.contentEquals("empty")) {
@@ -82,6 +82,7 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
 
         button1.setOnClickListener(this)
         button6.setOnClickListener(this)
+        button7.setOnClickListener (this)
 
 
         tripItem = intent.getParcelableExtra("item")
@@ -482,7 +483,7 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
 
                         sdh.dismissDialog()
                         sdh.showSuccessfulMessage("Done!", "تم التعليق بنجاح") {
-                            finish()
+                            sdh.dismissDialog()
                         }
 
                     }

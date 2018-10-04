@@ -68,7 +68,7 @@ class RecyclerViewAdapter(private val mContext: Context, private var modelList: 
         init {
 
             itemView.setOnClickListener { mItemClickListener!!.onItemClick(itemView, adapterPosition, modelList!![adapterPosition]) }
-
+            itemView.button1.setOnClickListener { mItemClickListener!!.onItemClick(itemView, adapterPosition, modelList!![adapterPosition]) }
         }
 
         fun bindCompany(model: Member?){
