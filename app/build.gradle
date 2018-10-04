@@ -8,6 +8,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'travelawy'
+            keyPassword 'password'
+            storeFile file('/home/mostafa/AndroidStudioProjects/Travelawy/key.jks')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "travel.com"
@@ -17,14 +25,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
-
     buildTypes.each {
         it.buildConfigField 'String', 'API_BASE_URL', '"http://php-eg.com/travel/public/api/"'
         it.buildConfigField 'String', 'Header_Accept', '"application/json"'
@@ -32,10 +44,11 @@ android {
         it.buildConfigField 'String', 'Accept_Language', '"ar"'
         it.buildConfigField 'String', 'User_Agent', '"android"'
     }
-
     // for parcelable objects
     androidExtensions {
         experimental = true
+    }
+    productFlavors {
     }
 }
 
@@ -47,7 +60,7 @@ configurations {
     compile.exclude group: 'org.jetbrains', module: 'annotations'
 }
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
@@ -64,12 +77,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.9'
-//    pick image
+    //    pick image
     implementation 'me.iwf.photopicker:PhotoPicker:0.9.5@aar'
-//    permission dispatcher
+    //    permission dispatcher
     implementation "com.github.hotchemi:permissionsdispatcher:$dispatcher_version"
     kapt "com.github.hotchemi:permissionsdispatcher-processor:$dispatcher_version"
-
     implementation 'com.github.f0ris.sweetalert:library:1.5.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
