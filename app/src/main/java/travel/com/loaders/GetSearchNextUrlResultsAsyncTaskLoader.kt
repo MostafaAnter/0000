@@ -37,9 +37,6 @@ import travel.com.utility.Util
 class GetSearchNextUrlResultsAsyncTaskLoader(context: Context, baseUrl: String) : AsyncTaskLoader<List<DataItem>>(context) {
 
     private var mData: List<DataItem>? = null
-    private val downloadedFile = File(
-            getContext().filesDir, FILE_NAME)
-
     // for retrofit request
     private var subscription: Subscription? = null
     private val apiService: ApiInterface
@@ -52,19 +49,7 @@ class GetSearchNextUrlResultsAsyncTaskLoader(context: Context, baseUrl: String) 
     }
 
     override fun onStartLoading() {
-        if (mData != null) {
-            // use cashed data
-            deliverResult(mData)
-        }
-        Util.ReadObjectsFromFile<DataItem>({
-            mData = it
-            if (mData != null) {
-                // use cashed data
-                deliverResult(mData)
-            }
-
             forceLoad()
-        }, downloadedFile).execute()
     }
 
     override fun loadInBackground(): List<DataItem>? {
@@ -87,10 +72,8 @@ class GetSearchNextUrlResultsAsyncTaskLoader(context: Context, baseUrl: String) 
 
                     override fun onNext(getCountriesResult: SearchResults) {
                         mData = getCountriesResult.paginator?.data
-                        TripsResultsActivity.nextUrl = getCountriesResult?.paginator?.next_page_url!!
+                        TripsResultsActivity.nextUrl = getCountriesResult.paginator?.next_page_url!!
                         deliverResult(mData)
-                        deleteFileContent(downloadedFile)
-                        saveObjectsInsideFile(downloadedFile, mData!!)
 
                     }
                 })
@@ -105,38 +88,5 @@ class GetSearchNextUrlResultsAsyncTaskLoader(context: Context, baseUrl: String) 
         // We can do any pre-processing we want here
         // Just remember this is on the UI thread so nothing lengthy!
         super.deliverResult(data)
-    }
-
-    override fun onReset() {
-
-    }
-
-    private fun <T> saveObjectsInsideFile(file: File, items: List<T>) {
-        try {
-            val outStream = FileOutputStream(file)
-            val objectOutStream = ObjectOutputStream(outStream)
-            objectOutStream.writeInt(items.size) // Save size first
-            for (item in items)
-                objectOutStream.writeObject(item)
-            objectOutStream.close()
-
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-    }
-
-    companion object {
-        private val FILE_NAME = "GetSearchResultsAsyncTaskLoader"
-
-        private fun deleteFileContent(file: File) {
-            try {
-                val writer = PrintWriter(file)
-                writer.close()
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
-            }
-
-        }
     }
 }

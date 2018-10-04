@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import travel.com.R
+import travel.com.loaders.GetSearchNextUrlResultsAsyncTaskLoader
 import travel.com.loaders.GetSearchResultsAsyncTaskLoader
 import travel.com.touristesPopUpFilter.PopUPFilter
 import travel.com.touristesPopUpFilter.SearchQueryObject
@@ -74,15 +75,16 @@ class TripsResultsActivity : AppCompatActivity() {
             getDate()
         }
 
-        fab.setOnClickListener(View.OnClickListener {
+        fab.setOnClickListener {
             startActivity(Intent(this, PopUPFilter::class.java))
             overridePendingTransition(R.anim.push_up_enter, R.anim.push_up_exit)
-        })
+        }
 
         // set scroll listener
         scrollListener = object: EndlessRecyclerViewScrollListener(layoutManager){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 toast("جارى تحميل المزيد...")
+                nextData()
             }
 
         }
@@ -102,6 +104,13 @@ class TripsResultsActivity : AppCompatActivity() {
         if (!swipeRefreshRecyclerList!!.isRefreshing)
             swipeRefreshRecyclerList!!.isRefreshing = true
         supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getAllTrip)
+
+    }
+
+    private fun nextData(){
+        if (!swipeRefreshRecyclerList!!.isRefreshing)
+            swipeRefreshRecyclerList!!.isRefreshing = true
+        supportLoaderManager.initLoader(Random().nextInt(1000 - 10 + 1) + 10, null, getAllNextTrip)
 
     }
 
@@ -188,6 +197,34 @@ class TripsResultsActivity : AppCompatActivity() {
                 mAdapter?.notifyDataSetChanged()
                 isEmptyData()
             }
+        }
+
+        override fun onLoaderReset(loader: Loader<List<DataItem>>) {
+            // Loader reset, throw away our data,
+            // unregister any listeners, etc.
+            // Of course, unless you use destroyLoader(),
+            // this is called when everything is already dying
+            // so a completely empty onLoaderReset() is
+            // totally acceptable
+        }
+    }
+
+    private val getAllNextTrip = object : LoaderManager.LoaderCallbacks<List<DataItem>> {
+        override fun onCreateLoader(
+                id: Int, args: Bundle?): Loader<List<DataItem>> {
+            return GetSearchNextUrlResultsAsyncTaskLoader(this@TripsResultsActivity, baseUrl = nextUrl)
+        }
+
+        override fun onLoadFinished(
+                loader: Loader<List<DataItem>>, data: List<DataItem>?) {
+            // Display our data, for instance updating our adapter
+            if (data != null) {
+                with(modelList){
+                    data.forEach{
+                        add(it)
+                    }
+                }
+                mAdapter?.notifyDataSetChanged() }
         }
 
         override fun onLoaderReset(loader: Loader<List<DataItem>>) {
