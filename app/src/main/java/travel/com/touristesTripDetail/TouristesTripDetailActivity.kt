@@ -30,7 +30,9 @@ import travel.com.touristesTripResults.models.DataItem
 import travel.com.utility.Constants
 import travel.com.utility.SweetDialogHelper
 import travel.com.utility.Util
+import travel.com.utility.ZoomOutTransformer
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -53,6 +55,9 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
     }
+
+    // view pager
+    private var pagerAdapter: CustomPagerAdapter? = null
 
     // for services avilable
     private var servicesAdapter: ServicesAvilableAdapter? = null
@@ -182,212 +187,15 @@ class TouristesTripDetailActivity : AppCompatActivity(), View.OnClickListener{
 
             text7.text = price + "EL"
 
-            when{
-                trip_images?.size == 1 ->{
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(smallImage1)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(mainImage)
-                    smallImage1.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[0].image) // add your image url
-                                .into(mainImage)
-                    }
 
-                }
-                trip_images?.size == 2 ->{
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(smallImage1)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[1].image) // add your image url
-                            .into(smallImage2)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(mainImage)
+            pagerAdapter = CustomPagerAdapter(this@TouristesTripDetailActivity,
+                    ArrayList(trip_images?.map { it.image }))
+            viewpager.visibility = View.VISIBLE
+            viewpager_pager_indicator.visibility = View.VISIBLE
+            viewpager.adapter = pagerAdapter
+            viewpager.setPageTransformer(false, ZoomOutTransformer())
+            viewpager_pager_indicator.attachToViewPager(viewpager)
 
-                    smallImage1.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[0].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage2.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[1].image) // add your image url
-                                .into(mainImage)
-                    }
-                }
-                trip_images?.size == 3 ->{
-
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(smallImage1)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[1].image) // add your image url
-                            .into(smallImage2)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[2].image) // add your image url
-                            .into(smallImage3)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(mainImage)
-                    smallImage1.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[0].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage2.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[1].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage3.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[2].image) // add your image url
-                                .into(mainImage)
-                    }
-                }
-                trip_images?.size == 4 ->{
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(smallImage1)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[1].image) // add your image url
-                            .into(smallImage2)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[2].image) // add your image url
-                            .into(smallImage3)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[3].image) // add your image url
-                            .into(smallImage4)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(mainImage)
-                    smallImage1.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[0].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage2.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[1].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage3.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[2].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage4.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[3].image) // add your image url
-                                .into(mainImage)
-                    }
-                }
-                trip_images?.size == 5 ->{
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(smallImage1)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[1].image) // add your image url
-                            .into(smallImage2)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[2].image) // add your image url
-                            .into(smallImage3)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[3].image) // add your image url
-                            .into(smallImage4)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[4].image) // add your image url
-                            .into(smallImage5)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(mainImage)
-                    smallImage1.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[0].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage2.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[1].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage3.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[2].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage4.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[3].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage5.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[4].image) // add your image url
-                                .into(mainImage)
-                    }
-                }
-                trip_images?.size!! >= 6 ->{
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(smallImage1)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[1].image) // add your image url
-                            .into(smallImage2)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[2].image) // add your image url
-                            .into(smallImage3)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[3].image) // add your image url
-                            .into(smallImage4)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[4].image) // add your image url
-                            .into(smallImage5)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[5].image) // add your image url
-                            .into(smallImage6)
-                    Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                            .load(trip_images[0].image) // add your image url
-                            .into(mainImage)
-                    smallImage1.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[0].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage2.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[1].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage3.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[2].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage4.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[3].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage5.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[4].image) // add your image url
-                                .into(mainImage)
-                    }
-                    smallImage6.setOnClickListener {
-                        Glide.with(this@TouristesTripDetailActivity)   // pass Context
-                                .load(trip_images[5].image) // add your image url
-                                .into(mainImage)
-                    }
-                }
-                else ->{
-
-                }
-            }
 
             text9.text = hotel_dec
             text12.text = important_info

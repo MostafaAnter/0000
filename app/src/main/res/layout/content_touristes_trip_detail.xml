@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:indefinite_pager_indicator="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -149,13 +150,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="100dp">
-                <ImageView
-                    android:id="@+id/mainImage"
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
                     android:layout_width="match_parent"
+                    android:layout_height="208dp" />
+
+                <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
+                    android:id="@+id/viewpager_pager_indicator"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/gray"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/cdn"/>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    indefinite_pager_indicator:dotColor="@color/gray_757575"
+                    indefinite_pager_indicator:selectedDotColor="@color/colorAccent" />
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -182,78 +190,6 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
             </FrameLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:id="@+id/tableRow1"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
-                    <ImageView
-                        android:id="@+id/smallImage3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="1dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/border_shape_grey_without_border"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:id="@+id/smallImage2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="1dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/border_shape_grey_without_border"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:id="@+id/smallImage1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="1dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/border_shape_grey_without_border"
-                        android:adjustViewBounds="true"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/tableRow2"
-                    android:minHeight="70dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent">
-                    <ImageView
-                        android:id="@+id/smallImage6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:scaleType="fitXY"
-                        android:padding="1dp"
-                        android:src="@drawable/border_shape_grey_without_border"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:id="@+id/smallImage5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="1dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/border_shape_grey_without_border"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:id="@+id/smallImage4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="1dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/border_shape_grey_without_border"
-                        android:adjustViewBounds="true"/>
-                </LinearLayout>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.9'
 //    pick image
     implementation 'me.iwf.photopicker:PhotoPicker:0.9.5@aar'
 //    permission dispatcher
