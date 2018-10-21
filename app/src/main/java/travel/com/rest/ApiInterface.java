@@ -174,6 +174,11 @@ notefdsf
                                      @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                      @Header("User-Agent") String userAgent, @Field("email") String email,
                                      @Field("password") String password);
+    @FormUrlEncoded
+    @POST("login/google")
+    Observable<SignInResponse> loginSocial(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                     @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                     @Header("User-Agent") String userAgent, @Field("token") String token);
 
     @Multipart
     @POST("register")

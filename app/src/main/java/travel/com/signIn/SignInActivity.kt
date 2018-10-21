@@ -9,6 +9,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -29,6 +30,8 @@ import travel.com.BuildConfig
 import travel.com.rest.ApiClient
 import travel.com.rest.ApiInterface
 import travel.com.signUp.SignUpActivity
+import travel.com.socialLoginUtil.SocialLoginManager
+import travel.com.socialLoginUtil.SocialUser
 import travel.com.store.TravellawyPrefStore
 import travel.com.utility.Constants
 import travel.com.utility.SweetDialogHelper
@@ -37,7 +40,7 @@ import java.lang.Exception
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var sdh :SweetDialogHelper
+    private lateinit var sdh: SweetDialogHelper
     private var apiService: ApiInterface? = null
     private var subscription1: Subscription? = null
 
@@ -62,17 +65,20 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         sign_up_button.setOnClickListener(this)
         email_sign_in_button.setOnClickListener(this)
 
+        loginWithFace.setOnClickListener { loginByFacebook() }
+        loginWithGoogle.setOnClickListener { loginByGoogle() }
+
     }
 
     fun changeViewsFonts() {
         Util.changeViewTypeFace(this@SignInActivity, Constants.FONT_REGULAR, toolbarTitle,
-                email, password, sign_up_button, email_sign_in_button, text1, text2)
+                email, password, sign_up_button, email_sign_in_button, text1, text2, text55, text56)
     }
 
     override fun onStart() {
         super.onStart()
         if (!TravellawyPrefStore(this).getPreferenceValue(Constants.AUTHORIZATION, "empty")
-                        !!.contentEquals("empty")) {
+                !!.contentEquals("empty")) {
             finish()
         }
     }
@@ -137,7 +143,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                     }
 
                     override fun onNext(signUpResult: SignInResponse?) {
-                        if (signUpResult?.code != 100 || signUpResult?.item == null){
+                        if (signUpResult?.code != 100 || signUpResult?.item == null) {
                             sdh.dismissDialog()
                             sdh.showErrorMessage("فشل!", signUpResult?.message)
                             return
@@ -156,4 +162,88 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    private fun loginByFacebook() {
+        SocialLoginManager.getInstance(this)
+                .facebook()
+                .login()
+                .subscribe(object : Subscriber<SocialUser>() {
+                    override fun onCompleted() {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("error", e.message)
+                        sdh.showErrorMessage("Error!", e.message)
+                    }
+
+                    override fun onNext(socialUser: SocialUser) {
+
+                        sdh.showMaterialProgress(getString(R.string.loading))
+                        loginSocial(socialUser, sdh, this@SignInActivity)
+
+                    }
+                })
+    }
+
+    private fun loginByGoogle() {
+        SocialLoginManager.getInstance(this)
+                .google("572790949264-raqm7foekfp46ub27esq5s61dbb698si.apps.googleusercontent.com")
+                .login()
+                .subscribe(object : Subscriber<SocialUser>() {
+                    override fun onCompleted() {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("error", e.message)
+                        sdh.showErrorMessage("Error!", e.message)
+                    }
+
+                    override fun onNext(socialUser: SocialUser) {
+
+                        sdh.showMaterialProgress(getString(R.string.loading))
+                        loginSocial(socialUser, sdh, this@SignInActivity)
+
+                    }
+                })
+    }
+
+    private fun loginSocial(user: SocialUser, sdh: SweetDialogHelper, mContext: Context) {
+        sdh.showMaterialProgress(getString(R.string.loading))
+        val loginNormal = apiService?.loginSocial(BuildConfig.Header_Accept,
+                TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                BuildConfig.From,
+                BuildConfig.Accept_Language, BuildConfig.User_Agent, user.accessToken)
+        subscription1 = loginNormal
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Subscriber<SignInResponse>() {
+                    override fun onCompleted() {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        sdh.dismissDialog()
+                        sdh.showErrorMessage("Error!", e.message)
+                    }
+
+                    override fun onNext(signUpResult: SignInResponse?) {
+                        if (signUpResult?.code != 100 || signUpResult?.item == null) {
+                            sdh.dismissDialog()
+                            sdh.showErrorMessage("فشل!", signUpResult?.message)
+                            return
+                        }
+                        // save user data
+                        signUpResult?.item?.authorization?.let { TravellawyPrefStore(mContext).addPreference(Constants.AUTHORIZATION, it) }
+                        signUpResult?.item?.id?.let { TravellawyPrefStore(mContext).addPreference(Constants.USER_ID, it) }
+
+                        sdh.dismissDialog()
+                        sdh.showSuccessfulMessage("Welcome!", signUpResult?.item?.name) {
+                            finish()
+                        }
+
+                    }
+                })
+
+    }
 }

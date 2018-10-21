@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:fitsSystemWindows="false"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="none">
@@ -34,16 +34,18 @@
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:contentDescription="@null"
                 android:src="@drawable/login_title" />
+
             <TextView
                 android:id="@+id/text1"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="البريد الإلكتروني"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Medium"/>
+                android:text="البريد الإلكتروني"
+                android:textColor="@color/colorPrimary" />
+
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -58,15 +60,15 @@
 
             <TextView
                 android:id="@+id/text2"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="الرقم السري"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Medium"/>
+                android:text="الرقم السري"
+                android:textColor="@color/colorPrimary" />
 
             <EditText
                 android:id="@+id/password"
@@ -80,8 +82,6 @@
                 android:padding="12dp"
                 android:singleLine="true"
                 android:textSize="12sp" />
-
-
 
 
             <TextView
@@ -103,6 +103,66 @@
                 android:background="@color/colorAccent"
                 android:text="دخول"
                 android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/loginWithFace"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="#4342A1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="8dp"
+                        android:src="@drawable/facebook" />
+
+                    <TextView
+                        android:id="@+id/text56"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:text="سجل بالفيسبوك"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/loginWithGoogle"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="#EB271E"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:src="@drawable/google" />
+
+                    <TextView
+                        android:id="@+id/text55"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:text="سجل بحساب جوجل"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

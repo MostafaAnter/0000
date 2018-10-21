@@ -2,6 +2,7 @@ package travel.com.utility
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.os.AsyncTask
@@ -10,12 +11,16 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.text.Spannable
 import android.text.SpannableString
+import android.util.Base64
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import java.io.*
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,6 +31,23 @@ fun AppCompatActivity.toast(message: CharSequence, duration: Int = Toast.LENGTH_
 
 class Util{
     companion object {
+        fun getHashKey(mContext: Context) {
+            try {
+                val info = mContext.packageManager.getPackageInfo(
+                        "bugless.apps.wikipets",
+                        PackageManager.GET_SIGNATURES)
+                for (signature in info.signatures) {
+                    val md = MessageDigest.getInstance("SHA")
+                    md.update(signature.toByteArray())
+                    Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+                }
+            } catch (e: PackageManager.NameNotFoundException) {
+
+            } catch (e: NoSuchAlgorithmException) {
+
+            }
+
+        }
         fun manipulateToolbar(mContext: AppCompatActivity,
                               toolbar: Toolbar,
                               navigationIcon: Int,

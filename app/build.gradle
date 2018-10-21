@@ -43,6 +43,8 @@ android {
         it.buildConfigField 'String', 'From', '"1111"'
         it.buildConfigField 'String', 'Accept_Language', '"ar"'
         it.buildConfigField 'String', 'User_Agent', '"android"'
+        it.resValue 'string', 'facebook_app_id', '"1042265939288234"'
+        it.resValue 'string', 'fb_login_protocol_scheme', '"fb1042265939288234"'
     }
     // for parcelable objects
     androidExtensions {
@@ -77,6 +79,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.9'
+    // social login
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
     //    pick image
     implementation 'me.iwf.photopicker:PhotoPicker:0.9.5@aar'
     //    permission dispatcher
