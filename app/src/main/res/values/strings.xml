@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Travelawy</string>
+    <string name="app_name">Travellawy</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

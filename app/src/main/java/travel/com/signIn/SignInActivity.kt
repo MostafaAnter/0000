@@ -187,7 +187,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun loginByGoogle() {
         SocialLoginManager.getInstance(this)
-                .google("572790949264-raqm7foekfp46ub27esq5s61dbb698si.apps.googleusercontent.com")
+                .google("572790949264-lfu38c5905tlfiqemj8r9tfva5pikcf6.apps.googleusercontent.com")
                 .login()
                 .subscribe(object : Subscriber<SocialUser>() {
                     override fun onCompleted() {
