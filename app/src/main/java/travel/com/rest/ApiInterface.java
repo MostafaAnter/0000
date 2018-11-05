@@ -180,6 +180,12 @@ notefdsf
                                      @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
                                      @Header("User-Agent") String userAgent, @Field("token") String token);
 
+    @FormUrlEncoded
+    @POST("login/facebook")
+    Observable<SignInResponse> loginSocialf(@Header("Accept") String accept, @Header("Authorization") String authorization,
+                                           @Header("From") String from, @Header("Accept-Language") String acceptLanguage,
+                                           @Header("User-Agent") String userAgent, @Field("token") String token);
+
     @Multipart
     @POST("register")
     Observable<SignInResponse> signUp(@Header("Accept") String accept,

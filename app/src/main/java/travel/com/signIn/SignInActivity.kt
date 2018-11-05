@@ -3,12 +3,15 @@ package travel.com.signIn
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.facebook.AccessToken
+import com.google.android.gms.auth.GoogleAuthUtil
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.content_sign_in.*
 import rx.Subscriber
@@ -196,7 +199,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
         Log.d("Person image: ", facebookUser.facebookID + "")
 
         sdh.showMaterialProgress(getString(R.string.loading))
-        loginSocial(facebookUser.facebookID, sdh, this@SignInActivity)
+        loginSocialf(getAccessTokenFromFacebook(), sdh, this@SignInActivity)
     }
 
     private fun loginByGoogle() {
@@ -206,7 +209,29 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
     override fun onGoogleAuthSignIn(user: GoogleAuthUser?) {
         Toast.makeText(this, "Google user data: name= " + user?.name + " email= " + user?.email, Toast.LENGTH_SHORT).show();
         sdh.showMaterialProgress(getString(R.string.loading))
-        loginSocial(user?.idToken!!, sdh, this@SignInActivity)
+        getAccessTokenFromGoogle(user?.email!!){
+            loginSocial(it, sdh, this@SignInActivity)
+        }
+    }
+
+    fun getAccessTokenFromFacebook(): String {
+        val token = AccessToken.getCurrentAccessToken()
+        return token.token
+    }
+
+    fun getAccessTokenFromGoogle(email: String, action: (String)-> Unit){
+        object : AsyncTask<Unit, Unit, Unit>(){
+            var token: String = ""
+            override fun doInBackground(vararg p0: Unit?) {
+                token = GoogleAuthUtil.getToken(this@SignInActivity, email, "oauth2:profile email")
+            }
+
+            override fun onPostExecute(result: Unit?) {
+                super.onPostExecute(result)
+                action(token)
+            }
+
+        }.execute()
     }
 
     override fun onGoogleAuthSignInFailed() {
@@ -228,18 +253,61 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(object : Subscriber<SignInResponse>() {
                     override fun onCompleted() {
-
                     }
 
                     override fun onError(e: Throwable) {
                         sdh.dismissDialog()
                         sdh.showErrorMessage("Error!", e.message)
+
+
                     }
 
                     override fun onNext(signUpResult: SignInResponse?) {
                         if (signUpResult?.code != 100 || signUpResult?.item == null) {
                             sdh.dismissDialog()
                             sdh.showErrorMessage("فشل!", signUpResult?.message)
+                            sdh.dismissDialog()
+                            return
+                        }
+                        // save user data
+                        signUpResult?.item?.authorization?.let { TravellawyPrefStore(mContext).addPreference(Constants.AUTHORIZATION, it) }
+                        signUpResult?.item?.id?.let { TravellawyPrefStore(mContext).addPreference(Constants.USER_ID, it) }
+
+                        sdh.dismissDialog()
+                        sdh.showSuccessfulMessage("Welcome!", signUpResult?.item?.name) {
+                            finish()
+                        }
+
+                    }
+                })
+
+    }
+
+    private fun loginSocialf(accessToken: String, sdh: SweetDialogHelper, mContext: Context) {
+        sdh.showMaterialProgress(getString(R.string.loading))
+        val loginNormal = apiService?.loginSocialf(BuildConfig.Header_Accept,
+                TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
+                BuildConfig.From,
+                BuildConfig.Accept_Language, BuildConfig.User_Agent, accessToken)
+        subscription1 = loginNormal
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Subscriber<SignInResponse>() {
+                    override fun onCompleted() {
+                    }
+
+                    override fun onError(e: Throwable) {
+
+                        sdh.dismissDialog()
+                        sdh.showErrorMessage("Error!", e.message)
+
+                    }
+
+                    override fun onNext(signUpResult: SignInResponse?) {
+                        if (signUpResult?.code != 100 || signUpResult?.item == null) {
+                            sdh.dismissDialog()
+                            sdh.showErrorMessage("فشل!", signUpResult?.message)
+                            sdh.dismissDialog()
                             return
                         }
                         // save user data
