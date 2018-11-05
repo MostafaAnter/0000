@@ -123,7 +123,7 @@ public class SweetDialogHelper {
     }
 
     public void dismissDialog() {
-        pDialog.dismissWithAnimation();
+        pDialog.dismiss();
     }
 
     private int i = -1;

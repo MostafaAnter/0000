@@ -183,22 +183,20 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onFbSignInSuccess() {
-        Toast.makeText(this, "Facebook sign in success", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onFBSignOut() {
-        Toast.makeText(this, "Facebook sign out success", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onFbProfileReceived(facebookUser: FacebookUser) {
-        Toast.makeText(this, "Facebook user data: name= " + facebookUser.name + " email= " + facebookUser.email, Toast.LENGTH_SHORT).show()
 
         Log.d("Person name: ", facebookUser.name + "")
         Log.d("Person gender: ", facebookUser.gender + "")
         Log.d("Person email: ", facebookUser.email + "")
         Log.d("Person image: ", facebookUser.facebookID + "")
 
-        sdh.showMaterialProgress(getString(R.string.loading))
         loginSocialf(getAccessTokenFromFacebook(), sdh, this@SignInActivity)
     }
 
@@ -207,8 +205,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onGoogleAuthSignIn(user: GoogleAuthUser?) {
-        Toast.makeText(this, "Google user data: name= " + user?.name + " email= " + user?.email, Toast.LENGTH_SHORT).show();
-        sdh.showMaterialProgress(getString(R.string.loading))
         getAccessTokenFromGoogle(user?.email!!){
             loginSocial(it, sdh, this@SignInActivity)
         }
@@ -266,7 +262,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
                         if (signUpResult?.code != 100 || signUpResult?.item == null) {
                             sdh.dismissDialog()
                             sdh.showErrorMessage("فشل!", signUpResult?.message)
-                            sdh.dismissDialog()
                             return
                         }
                         // save user data
@@ -307,7 +302,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener,
                         if (signUpResult?.code != 100 || signUpResult?.item == null) {
                             sdh.dismissDialog()
                             sdh.showErrorMessage("فشل!", signUpResult?.message)
-                            sdh.dismissDialog()
                             return
                         }
                         // save user data
