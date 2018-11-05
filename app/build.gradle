@@ -80,8 +80,8 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.9'
     // social login
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.facebook.android:facebook-android-sdk:4.7.0'
     //    pick image
     implementation 'me.iwf.photopicker:PhotoPicker:0.9.5@aar'
     //    permission dispatcher

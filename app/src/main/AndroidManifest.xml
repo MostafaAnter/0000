@@ -25,39 +25,6 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <!-- login with social utils -->
-        <activity
-            android:name=".socialLoginUtil.FbLoginHiddenActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
-        <activity
-            android:name=".socialLoginUtil.GoogleLoginHiddenActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
-        <!-- login with social utils -->
-        <!-- facebook setup start -->
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:theme" />
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
-        </activity>
-        <!-- facebook setup end -->
-
         <activity
             android:name=".splashScreen.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -67,6 +34,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Use For Facebook Login -->
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -113,13 +90,14 @@
         <activity
             android:name=".signIn.SignInActivity"
             android:label="@string/title_activity_sign_in"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".signUp.SignUpActivity"
             android:label="@string/title_activity_sign_out"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
     </application>
 
 </manifest>

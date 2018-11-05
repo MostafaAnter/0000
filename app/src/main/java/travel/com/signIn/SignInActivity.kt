@@ -1,25 +1,14 @@
 package travel.com.signIn
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.target.Target
-import travel.com.R
-
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.content_sign_in.*
 import rx.Subscriber
@@ -27,18 +16,25 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import travel.com.BuildConfig
+import travel.com.R
+import travel.com.facebookSignIn.FacebookHelper
+import travel.com.facebookSignIn.FacebookResponse
+import travel.com.facebookSignIn.FacebookUser
+import travel.com.googleAuthSignin.GoogleAuthResponse
+import travel.com.googleAuthSignin.GoogleAuthUser
+import travel.com.googleAuthSignin.GoogleSignInHelper
 import travel.com.rest.ApiClient
 import travel.com.rest.ApiInterface
 import travel.com.signUp.SignUpActivity
-import travel.com.socialLoginUtil.SocialLoginManager
-import travel.com.socialLoginUtil.SocialUser
 import travel.com.store.TravellawyPrefStore
 import travel.com.utility.Constants
 import travel.com.utility.SweetDialogHelper
 import travel.com.utility.Util
-import java.lang.Exception
 
-class SignInActivity : AppCompatActivity(), View.OnClickListener {
+
+class SignInActivity : AppCompatActivity(), View.OnClickListener,
+        FacebookResponse, GoogleAuthResponse {
+
 
     private lateinit var sdh: SweetDialogHelper
     private var apiService: ApiInterface? = null
@@ -50,11 +46,24 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     private var user_email: String? = null
     private var user_passsword: String? = null
 
+    private var mFbHelper: FacebookHelper? = null
+    private var mGAuthHelper: GoogleSignInHelper? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         changeViewsFonts()
         setToolbar()
+
+        // init social login
+        //google auth initialization
+        mGAuthHelper = GoogleSignInHelper(this,
+                "572790949264-raqm7foekfp46ub27esq5s61dbb698si.apps.googleusercontent.com", this)
+
+        //fb api initialization
+        mFbHelper = FacebookHelper(this,
+                "id,name,email,gender,birthday,picture,cover",
+                this)
 
         // init dialog
         sdh = SweetDialogHelper(this)
@@ -163,57 +172,57 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun loginByFacebook() {
-        SocialLoginManager.getInstance(this)
-                .facebook()
-                .login()
-                .subscribe(object : Subscriber<SocialUser>() {
-                    override fun onCompleted() {
+        mFbHelper?.performSignIn(this)
+    }
 
-                    }
+    override fun onFbSignInFail() {
+        Toast.makeText(this, "Facebook sign in failed.", Toast.LENGTH_SHORT).show()
+    }
 
-                    override fun onError(e: Throwable) {
-                        Log.e("error", e.message)
-                        sdh.showErrorMessage("Error!", e.message)
-                    }
+    override fun onFbSignInSuccess() {
+        Toast.makeText(this, "Facebook sign in success", Toast.LENGTH_SHORT).show()
+    }
 
-                    override fun onNext(socialUser: SocialUser) {
+    override fun onFBSignOut() {
+        Toast.makeText(this, "Facebook sign out success", Toast.LENGTH_SHORT).show()
+    }
 
-                        sdh.showMaterialProgress(getString(R.string.loading))
-                        loginSocial(socialUser, sdh, this@SignInActivity)
+    override fun onFbProfileReceived(facebookUser: FacebookUser) {
+        Toast.makeText(this, "Facebook user data: name= " + facebookUser.name + " email= " + facebookUser.email, Toast.LENGTH_SHORT).show()
 
-                    }
-                })
+        Log.d("Person name: ", facebookUser.name + "")
+        Log.d("Person gender: ", facebookUser.gender + "")
+        Log.d("Person email: ", facebookUser.email + "")
+        Log.d("Person image: ", facebookUser.facebookID + "")
+
+        sdh.showMaterialProgress(getString(R.string.loading))
+        loginSocial(facebookUser.facebookID, sdh, this@SignInActivity)
     }
 
     private fun loginByGoogle() {
-        SocialLoginManager.getInstance(this)
-                .google("572790949264-lfu38c5905tlfiqemj8r9tfva5pikcf6.apps.googleusercontent.com")
-                .login()
-                .subscribe(object : Subscriber<SocialUser>() {
-                    override fun onCompleted() {
-
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.e("error", e.message)
-                        sdh.showErrorMessage("Error!", e.message)
-                    }
-
-                    override fun onNext(socialUser: SocialUser) {
-
-                        sdh.showMaterialProgress(getString(R.string.loading))
-                        loginSocial(socialUser, sdh, this@SignInActivity)
-
-                    }
-                })
+        mGAuthHelper?.performSignIn(this)
     }
 
-    private fun loginSocial(user: SocialUser, sdh: SweetDialogHelper, mContext: Context) {
+    override fun onGoogleAuthSignIn(user: GoogleAuthUser?) {
+        Toast.makeText(this, "Google user data: name= " + user?.name + " email= " + user?.email, Toast.LENGTH_SHORT).show();
+        sdh.showMaterialProgress(getString(R.string.loading))
+        loginSocial(user?.idToken!!, sdh, this@SignInActivity)
+    }
+
+    override fun onGoogleAuthSignInFailed() {
+        Toast.makeText(this, "Google sign in failed.", Toast.LENGTH_SHORT).show();
+    }
+
+    override fun onGoogleAuthSignOut(isSuccess: Boolean) {
+
+    }
+
+    private fun loginSocial(accessToken: String, sdh: SweetDialogHelper, mContext: Context) {
         sdh.showMaterialProgress(getString(R.string.loading))
         val loginNormal = apiService?.loginSocial(BuildConfig.Header_Accept,
                 TravellawyPrefStore(mContext).getPreferenceValue(Constants.AUTHORIZATION, "empty"),
                 BuildConfig.From,
-                BuildConfig.Accept_Language, BuildConfig.User_Agent, user.accessToken)
+                BuildConfig.Accept_Language, BuildConfig.User_Agent, accessToken)
         subscription1 = loginNormal
                 ?.subscribeOn(Schedulers.newThread())
                 ?.observeOn(AndroidSchedulers.mainThread())
@@ -246,4 +255,12 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
                 })
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //handle results
+        mFbHelper?.onActivityResult(requestCode, resultCode, data)
+        mGAuthHelper?.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
